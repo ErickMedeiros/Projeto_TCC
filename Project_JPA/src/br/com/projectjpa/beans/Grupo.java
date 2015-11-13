@@ -17,19 +17,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="GRUPO")
-
 public class Grupo implements Serializable {
-	@Id
-	@Column(name="id")
-	@SequenceGenerator(name="SEQ_GRUPO", sequenceName="SEQ_GRUPO_ID", allocationSize=1)
+	@Id	
+	@Column(name="ID")
+	@SequenceGenerator(name="SEQ_GRUPO", sequenceName="SEQ_GRUPO_ID", 
+			allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_GRUPO")
 	private Integer id;
-	
-	@NotEmpty(message="O nome não pode ser nulo.")
-	@Length(max=50, message="O nome não pode ser maior que {max} caracteres")
-	@Column(name="nome", length=50, nullable=false)
+	@NotEmpty(message="O nome não pode ser nule")
+	@Length(max=50, message="O nome não pode ultrapassar {max} caracteres")
+	@Column(name="NOME", length=50, nullable=false)
 	@Index(name="IDX_GRUPO_NOME")
 	private String nome;
+	
 	
 	public Grupo (){
 		

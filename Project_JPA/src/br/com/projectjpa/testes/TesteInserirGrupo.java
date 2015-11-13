@@ -9,7 +9,7 @@ public class TesteInserirGrupo {
 
 	public static void main(String[] args) {
 		
-					// 
+					 
 			EntityManager em = EntityManagerUtil.getEntityManager();
 			Grupo g = new Grupo();
 			g.setNome("Gestores");
