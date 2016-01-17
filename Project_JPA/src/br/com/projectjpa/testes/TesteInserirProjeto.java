@@ -20,15 +20,15 @@ public class TesteInserirProjeto {
 		Setor setor = em.find(Setor.class, 1);
 		Funcionario func = em.find(Funcionario.class, 1);
 		Projeto projeto = new Projeto();
-		projeto.setNome("Projeto JPA");
-		projeto.setDescricao("Meu novo projeto JSF com JPA e Hibernate");
+		projeto.setNome("Projeto JSF");
+		projeto.setDescricao("Meu novo projeto JSF");
 		projeto.setInicio(Calendar.getInstance());
 		projeto.setFim(Calendar.getInstance());
 		projeto.setAtivo(true);
 		projeto.setSetor(setor);
 		ProjetoFuncionario pf = new ProjetoFuncionario() ;
 		pf.setFuncionario(func);
-		pf.setCargaHoraria(100);
+		pf.setCargaHoraria(200);
 		pf.setInicioParticipacao(Calendar.getInstance());
 		pf.setFimParticipacao(Calendar.getInstance());
 		pf.setGestor(true);

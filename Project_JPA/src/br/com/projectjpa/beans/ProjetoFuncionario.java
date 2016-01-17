@@ -24,24 +24,30 @@ public class ProjetoFuncionario implements Serializable {
 	@SequenceGenerator(name = "SEQ_PROJ_FUNC", sequenceName = "GEN_PRO_FUNC_ID", allocationSize = 1)
 	@GeneratedValue(generator = "SEQ_PROJ_FUNC", strategy = GenerationType.SEQUENCE)
 	private Integer id;
+	
 	@NotNull(message = "A carga horária deve ser informada")
 	@Column(name = "CARGA_HORARIA", nullable = false)
 	private Integer cargaHoraria;
+	
 	@NotNull(message = "Se funcionario é gestor deve ser informado")
 	@Column(name = "GESTOR", nullable = false)
 	private Boolean gestor;
+	
 	@NotNull(message = "Inicio da participação deve ser informada")
 	@Column(name = "INICIO_PARTICIPACAO", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar inicioParticipacao;
+	
 	@NotNull(message = "Fim da participação deve ser informada")
-	@Column(name = "Fim_PARTICIPACAO", nullable = false)
+	@Column(name = "FIM_PARTICIPACAO", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar fimParticipacao;
+	
 	@NotNull(message = "Funcionario deve ser informado")
 	@ManyToOne
 	@JoinColumn(name = "FUNCIONARIO", referencedColumnName = "ID", nullable = false)
 	private Funcionario funcionario;
+	
 	@NotNull(message = "Projeto deve ser informado")
 	@ManyToOne
 	@JoinColumn(name = "PROJETO", referencedColumnName = "ID", nullable = false)
