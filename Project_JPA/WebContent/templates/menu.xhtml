@@ -9,7 +9,13 @@
 
 <h:form>
 	<h:panelGrid columns="1">
+		<h:commandLink value="Funcionário" action="#{controleFuncionario.listar()}" />
+	</h:panelGrid>
+	<h:panelGrid columns="1">
 		<h:commandLink value="Grupos" action="#{controleGrupo.listar()}" />
+	</h:panelGrid>
+	<h:panelGrid columns="1">
+		<h:commandLink value="Setor" action="#{controleSetor.listar()}" />
 	</h:panelGrid>
 </h:form>
 
