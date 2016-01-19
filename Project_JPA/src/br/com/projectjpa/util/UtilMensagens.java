@@ -9,10 +9,10 @@ public class UtilMensagens {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,mensagem,"");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-
+	
 	public static void mensagemInformacao(String mensagem){
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,mensagem,"");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-	
+	}	
+
 }

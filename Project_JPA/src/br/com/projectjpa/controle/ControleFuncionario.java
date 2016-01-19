@@ -15,8 +15,8 @@ import br.com.projectjpa.model.SetorDAO;
 
 @ManagedBean(name="controleFuncionario")
 @SessionScoped
-public class ControleFuncionario implements Serializable {
-
+public class ControleFuncionario implements Serializable{
+	
 	private FuncionarioDAO dao;
 	private Funcionario objeto;
 	private GrupoDAO daoGrupo;
@@ -24,14 +24,12 @@ public class ControleFuncionario implements Serializable {
 	private ConverterGrupo converterGrupo;
 	private ConverterSetor converterSetor;
 	
-	
 	public ControleFuncionario(){
 		dao = new FuncionarioDAO();
 		daoGrupo = new GrupoDAO();
 		daoSetor = new SetorDAO();
 		converterGrupo = new ConverterGrupo();
 		converterSetor = new ConverterSetor();
-		
 	}
 	
 	public String listar(){
@@ -50,18 +48,18 @@ public class ControleFuncionario implements Serializable {
 	public String gravar(){
 		if (dao.gravar(objeto)){
 			return "listar";
-		} else {
+		}else{
 			return "form";
 		}
 	}
 	
 	public String alterar(Funcionario obj){
 		objeto = obj;
-		return "listar";
+		return "form";
 	}
 	
 	public String excluir(Funcionario obj){
-		dao.excluir(objeto);
+		dao.excluir(obj);
 		return "listar";
 	}
 	
@@ -102,7 +100,5 @@ public class ControleFuncionario implements Serializable {
 		this.converterSetor = converterSetor;
 	}
 	
-	
-	
-	
+
 }

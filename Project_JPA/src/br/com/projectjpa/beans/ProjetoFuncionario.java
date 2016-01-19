@@ -43,14 +43,14 @@ public class ProjetoFuncionario implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar fimParticipacao;
 	
-	@NotNull(message = "Funcionario deve ser informado")
+	@NotNull(message="Funcionario deve ser informado")
 	@ManyToOne
-	@JoinColumn(name = "FUNCIONARIO", referencedColumnName = "ID", nullable = false)
+	@JoinColumn(name="FUNCIONARIO", referencedColumnName="ID", nullable=false)	
 	private Funcionario funcionario;
 	
-	@NotNull(message = "Projeto deve ser informado")
+	@NotNull(message="Projeto deve ser informado")
 	@ManyToOne
-	@JoinColumn(name = "PROJETO", referencedColumnName = "ID", nullable = false)
+	@JoinColumn(name="PROJETO", referencedColumnName="ID", nullable=false)
 	private Projeto projeto;
 
 	public ProjetoFuncionario() {

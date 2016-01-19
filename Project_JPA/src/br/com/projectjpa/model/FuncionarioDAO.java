@@ -44,23 +44,23 @@ public class FuncionarioDAO {
 		}
 	}
 
-	public boolean excluir (Funcionario obj){
-		try{
+	public boolean excluir(Funcionario obj){
+		try {
 			em.getTransaction().begin();
 			em.remove(obj);
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dado excluído com sucesso!");
+			UtilMensagens.mensagemInformacao("Objeto removido com sucesso!");
 			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao excluir dados no banco"+
-			UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao remover objeto: "+
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
-	}
+	}	
 	
 	public Funcionario localizar (Integer id){
 		return em.find(Funcionario.class, id);

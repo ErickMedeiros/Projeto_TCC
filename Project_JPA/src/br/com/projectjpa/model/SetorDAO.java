@@ -10,7 +10,7 @@ import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
 
 public class SetorDAO {
-
+	
 	private EntityManager em;
 	
 	public SetorDAO(){
@@ -20,48 +20,48 @@ public class SetorDAO {
 	public List<Setor> listarTodos(){
 		return em.createQuery("from Setor order by nome").getResultList();
 	}
-	
-	public boolean gravar (Setor obj){
-		try{
+
+	public boolean gravar(Setor obj){
+		try {
 			em.getTransaction().begin();
 			if (obj.getId() == null){
 				em.persist(obj);
-			} else{
+			} else {
 				em.merge(obj);
 			}
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dados gravados com sucesso!");
+			UtilMensagens.mensagemInformacao("Objeto persistido com sucesso!");
 			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao gravar dados no banco"+
-			UtilErros.getMensagemErro(e));
-			return false;
-		}
-	}
-
-	public boolean excluir (Setor obj){
-		try{
-			em.getTransaction().begin();
-			em.remove(obj);
-			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dado excluído com sucesso!");
-			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
-				em.getTransaction().begin();
-			}
-			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao excluir dados no banco"+
-			UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
 	
-	public Setor localizar (Integer id){
+	public boolean excluir(Setor obj){
+		try {
+			em.getTransaction().begin();
+			em.remove(obj);
+			em.getTransaction().commit();
+			UtilMensagens.mensagemInformacao("Objeto removido com sucesso!");
+			return true;
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
+				em.getTransaction().begin();
+			}
+			em.getTransaction().rollback();
+			UtilMensagens.mensagemErro("Erro ao remover objeto: "+
+			                                  UtilErros.getMensagemErro(e));
+			return false;
+		}
+	}	
+	
+	public Setor localizar(Integer id){
 		return em.find(Setor.class, id);
 	}
 	
@@ -72,6 +72,5 @@ public class SetorDAO {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-	
+
 }

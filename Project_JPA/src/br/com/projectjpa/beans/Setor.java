@@ -19,17 +19,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="SETOR")
 public class Setor implements Serializable{
-
 	@Id
 	@Column(name="ID")
 	@SequenceGenerator(name="SEQ_SETOR", sequenceName="SEQ_SETOR_ID",
 			allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_SETOR")
 	private Integer id;
-	
-	
-	@NotEmpty(message="O nome deve ser informado.")
-	@Length(max=50, message="O nome não pode ultrapassar {max} caracteres.")
+	@NotEmpty(message="O nome deve ser informado")
+	@Length(max=50, message="O nome não pode ultrapassar {max} caracteres")
 	@Column(name="NOME", length=50, nullable=false)
 	@org.hibernate.annotations.Index(name="IDX_SETOR_NOME")
 	private String nome;
@@ -80,7 +77,6 @@ public class Setor implements Serializable{
 	public String toString() {
 		return nome;
 	}
-	
 	
 	
 }

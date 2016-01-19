@@ -1,10 +1,9 @@
 package br.com.projectjpa.util;
 
 public class UtilErros {
-	
-	public static String getMensagemErro (Exception e){
+	public static String getMensagemErro(Exception e){
 		while (e.getCause() != null){
-			e = (Exception)e.getCause();			
+			e = (Exception) e.getCause();
 		}
 		String retorno = e.getMessage();
 		return retorno;

@@ -22,6 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
@@ -31,44 +32,36 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "PROJETO")
 public class Projeto implements Serializable {
-
 	@Id
 	@Column(name = "ID")
-	@SequenceGenerator(name = "SEQ_PROJ", sequenceName = "SEQ_PROJ_ID", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PROJ")
+	@SequenceGenerator(name = "SEQ_PROJ", sequenceName = "GEN_PRO_ID", allocationSize = 1)
+	@GeneratedValue(generator = "SEQ_PROJ", strategy = GenerationType.SEQUENCE)
 	private Integer id;
-
-	@Length(max = 50, message = "O valor não pode ultrapassar {max} caracteres")
-	@NotEmpty(message = "O nome deve ser preenchido")
-	@Column(name = "NOME", length = 50, nullable = false)
-	@org.hibernate.annotations.Index(name = "IDX_NOME_PROJETO")
+	@NotEmpty(message = "O nome deve ser informado")
+	@Length(max = 50, message = "O nome não deve ultrapassar {max} caracteres")
+	@Column(name = "NOME", nullable = false, length = 50)
+	@Index(name = "IDX_PROJETO_NOME")
 	private String nome;
-
 	@Type(type = "org.hibernate.type.StringClobType")
-	@NotEmpty(message = "Há descrição deve ser informada")
-	@Column(name = "DESCRICAO_PROJETO", nullable = false)
+	@NotEmpty(message = "A decrição deve ser informada")
+	@Column(name = "DESCRICAO", nullable = false)
 	@Lob
 	private String descricao;
-
-	@NotNull(message = "A data de início do projeto deve ser informada")
+	@NotNull(message = "Data de inicio deve ser informada")
 	@Column(name = "INICIO", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar inicio;
-
-	@NotNull(message = "A data do fim do projeto deve ser informada")
+	@NotNull(message = "Data de fim deve ser informada")
 	@Column(name = "FIM", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar fim;
-
-	@NotNull(message = "O ativo deve ser informado")
+	@NotNull(message = "Status do projeto deve ser informado")
 	@Column(name = "ATIVO", nullable = false)
 	private Boolean ativo;
-
-	@NotNull(message = "O setor deve ser informado")
+	@NotNull(message = "Setor deve ser informado")
 	@ManyToOne
-	@JoinColumn(name = "SETOR", nullable = false, referencedColumnName = "ID")
+	@JoinColumn(name = "SETOR", referencedColumnName = "ID", nullable = false)
 	private Setor setor;
-
 	@OneToMany(mappedBy = "projeto", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.EXTRA)
 	@OrderBy(value = "id asc")
@@ -161,7 +154,7 @@ public class Projeto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "nome";
+		return nome;
 	}
 
 	public List<ProjetoFuncionario> getFuncionarios() {
