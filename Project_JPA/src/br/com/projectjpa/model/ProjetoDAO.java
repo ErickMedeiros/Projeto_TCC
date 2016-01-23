@@ -4,46 +4,47 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.projectjpa.beans.Funcionario;
+import br.com.projectjpa.beans.Grupo;
+import br.com.projectjpa.beans.Projeto;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
 
-public class FuncionarioDAO {
-
+public class ProjetoDAO {
+	
 	private EntityManager em;
 	
-	public FuncionarioDAO(){
+	public ProjetoDAO(){
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
-	public List<Funcionario> listarTodos(){
-		return em.createQuery("from Funcionario order by nome").getResultList();
+	public List<Projeto> listarTodos(){
+		return em.createQuery("from Projeto order by nome").getResultList();
 	}
-	
-	public boolean gravar (Funcionario obj){
-		try{
+
+	public boolean gravar(Projeto obj){
+		try {
 			em.getTransaction().begin();
 			if (obj.getId() == null){
 				em.persist(obj);
-			} else{
+			} else {
 				em.merge(obj);
 			}
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dados gravados com sucesso!");
+			UtilMensagens.mensagemInformacao("Objeto persistido com sucesso!");
 			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao gravar dados no banco"+
-			UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
-
-	public boolean excluir(Funcionario obj){
+	
+	public boolean excluir(Projeto obj){
 		try {
 			em.getTransaction().begin();
 			em.remove(obj);
@@ -61,8 +62,8 @@ public class FuncionarioDAO {
 		}
 	}	
 	
-	public Funcionario localizar (Integer id){
-		return em.find(Funcionario.class, id);
+	public Projeto localizar(Integer id){
+		return em.find(Projeto.class, id);
 	}
 	
 	public EntityManager getEm() {
@@ -72,6 +73,5 @@ public class FuncionarioDAO {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-	
+
 }

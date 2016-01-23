@@ -30,99 +30,90 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "PROJETO")
-public class Projeto implements Serializable {
+@Table(name="PROJETO")
+public class Projeto implements Serializable{
 	@Id
-	@Column(name = "ID")
-	@SequenceGenerator(name = "SEQ_PROJ", sequenceName = "GEN_PRO_ID", allocationSize = 1)
-	@GeneratedValue(generator = "SEQ_PROJ", strategy = GenerationType.SEQUENCE)
+	@Column(name="ID")
+	@SequenceGenerator(name="SEQ_PROJ",sequenceName="GEN_PRO_ID", allocationSize=1 )
+	@GeneratedValue(generator="SEQ_PROJ", strategy=GenerationType.SEQUENCE)
 	private Integer id;
-	@NotEmpty(message = "O nome deve ser informado")
-	@Length(max = 50, message = "O nome não deve ultrapassar {max} caracteres")
-	@Column(name = "NOME", nullable = false, length = 50)
-	@Index(name = "IDX_PROJETO_NOME")
+	@NotEmpty(message="O nome deve ser informado")
+	@Length(max=50, message="O nome não deve ultrapassar {max} caracteres")
+	@Column(name="NOME", nullable=false, length=50)
+	@Index(name="IDX_PROJETO_NOME")
 	private String nome;
-	@Type(type = "org.hibernate.type.StringClobType")
-	@NotEmpty(message = "A decrição deve ser informada")
-	@Column(name = "DESCRICAO", nullable = false)
+	@Type(type="org.hibernate.type.StringClobType")
+	@NotEmpty(message="A decrição deve ser informada")
+	@Column(name="DESCRICAO_PROJETO", nullable=false)
 	@Lob
-	private String descricao;
-	@NotNull(message = "Data de inicio deve ser informada")
-	@Column(name = "INICIO", nullable = false)
+	private String descricao_projeto;
+	@NotNull(message="Data de inicio deve ser informada")
+	@Column(name="INICIO", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Calendar inicio;
-	@NotNull(message = "Data de fim deve ser informada")
-	@Column(name = "FIM", nullable = false)
-	@Temporal(TemporalType.DATE)
+	@NotNull(message="Data de fim deve ser informada")
+	@Column(name="FIM", nullable=false)
+	@Temporal(TemporalType.DATE)	
 	private Calendar fim;
-	@NotNull(message = "Status do projeto deve ser informado")
-	@Column(name = "ATIVO", nullable = false)
+	@NotNull(message="Status do projeto deve ser informado")
+	@Column(name="ATIVO", nullable=false)
 	private Boolean ativo;
-	@NotNull(message = "Setor deve ser informado")
+	@NotNull(message="Setor deve ser informado")
 	@ManyToOne
-	@JoinColumn(name = "SETOR", referencedColumnName = "ID", nullable = false)
+	@JoinColumn(name="SETOR", referencedColumnName="ID", nullable=false)
 	private Setor setor;
-	@OneToMany(mappedBy = "projeto", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToMany(mappedBy="projeto", cascade= {CascadeType.ALL},
+			orphanRemoval=true)
 	@LazyCollection(LazyCollectionOption.EXTRA)
-	@OrderBy(value = "id asc")
+	@OrderBy(value="id asc")
 	private List<ProjetoFuncionario> funcionarios = new ArrayList<ProjetoFuncionario>();
-
-	public Projeto() {
-
+	
+	public Projeto(){
+		
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getDescricao() {
-		return descricao;
+	
+	public String getDescricao_projeto() {
+		return descricao_projeto;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescricao_projeto(String descricao_projeto) {
+		this.descricao_projeto = descricao_projeto;
 	}
 
 	public Calendar getInicio() {
 		return inicio;
 	}
-
 	public void setInicio(Calendar inicio) {
 		this.inicio = inicio;
 	}
-
 	public Calendar getFim() {
 		return fim;
 	}
-
 	public void setFim(Calendar fim) {
 		this.fim = fim;
 	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
-
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
 	public Setor getSetor() {
 		return setor;
 	}
-
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
@@ -164,20 +155,20 @@ public class Projeto implements Serializable {
 	public void setFuncionarios(List<ProjetoFuncionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-
-	public void adicionarFuncionario(ProjetoFuncionario obj) {
+	
+	public void adicionarFuncionario(ProjetoFuncionario obj){
 		obj.setProjeto(this);
 		this.funcionarios.add(obj);
 	}
-
-	public void removerFuncionario(ProjetoFuncionario obj) {
-		if (this.funcionarios.contains(obj)) {
+	
+	public void removerFuncionario(ProjetoFuncionario obj){
+		if (this.funcionarios.contains(obj)){
 			this.funcionarios.remove(obj);
 		}
 	}
-
-	public void removerTodosFuncionarios() {
+	
+	public void removerTodosFuncionarios(){
 		this.funcionarios.clear();
 	}
-
+	
 }

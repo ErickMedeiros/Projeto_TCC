@@ -2,15 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Edição de funcionarios</title>
 	<h:outputScript library="js" name="scripts.js" />
 </h:head>
 <h:body>
-	<h:form>
-		<h:messages />
+	<h:form enctype="multipart/form-data">
+		<h:messages id="messages" />
 		<h:panelGrid columns="2">
 			<f:facet name="header">Edição de funcionários</f:facet>
 			<f:facet name="footer">
@@ -65,6 +66,14 @@
 					noSelectionOption="true" />
 				<f:selectItems value="#{controleFuncionario.daoSetor.listarTodos()}" />
 			</h:selectOneMenu>
+			<h:outputLabel value="Foto:" />
+			<p:fileUpload id="uploadImagem" mode="advanced"
+				update="messages,imagem" auto="true" label="Selecionar"
+				fileUploadListener="#{controleFuncionario.enviarFoto}"
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+			<h:outputLabel value="" />
+			<p:graphicImage value="#{controleFuncionario.objeto.imagem}"
+				id="imagem" style="width:60px;height:60px" cache="false" />
 		</h:panelGrid>
 
 	</h:form>

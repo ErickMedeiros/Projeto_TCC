@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head><title>Edição de projetos</title>
+	<h:outputScript library="js" name="scripts.js"/>
+</h:head> 
+<h:body> 
+	<h:form>
+		<h:messages />
+		<h:panelGrid columns="2">
+			<f:facet name="header">Edição de projetos</f:facet>
+			<f:facet name="footer">
+				<div align="center">
+					<h:commandButton action="#{controleProjeto.cancelar()}" value="Cancelar"
+					immediate="true" />
+					<h:commandButton action="#{controleProjeto.gravar()}" value="Gravar" />
+				</div>
+			</f:facet>
+			<h:outputLabel value="ID" />
+			<h:inputText value="#{controleProjeto.objeto.id}"  readonly="true"/>
+			<h:outputLabel value="Nome" />
+			<h:inputText value="#{controleProjeto.objeto.nome}"  size="40" maxlength="40"/>
+			<h:outputLabel value="Descrição" />
+			<h:inputTextarea value="#{controleProjeto.objeto.descricao_projeto}"
+				rows="5"  cols="60"/>
+			<h:outputLabel value="Inicio" />
+			<h:inputText value="#{controleProjeto.objeto.inicio}"
+			size="10" onkeydown="Mascara(this,Data);"  onkeyup="Mascara(this,Data);" 
+			onkeypress="Mascara(this,Data);">
+				<f:converter converterId="converterCalendar"/>
+			</h:inputText>
+			<h:outputLabel value="Fim" />
+			<h:inputText value="#{controleProjeto.objeto.fim}"
+			size="10" onkeydown="Mascara(this,Data);"  onkeyup="Mascara(this,Data);" 
+			onkeypress="Mascara(this,Data);">
+				<f:converter converterId="converterCalendar"/>
+			</h:inputText>	
+			<h:outputLabel value="Ativo" />
+			<h:selectBooleanCheckbox value="#{controleProjeto.objeto.ativo}" />
+			<h:outputLabel value="Setor" />
+			<h:selectOneMenu value="#{controleProjeto.objeto.setor}" 
+				converter="#{controleProjeto.converterSetor}">
+				<f:selectItem itemLabel="Selecione um setor" noSelectionOption="true"/>
+				<f:selectItems value="#{controleProjeto.daoSetor.listarTodos()}"/>
+			</h:selectOneMenu>		
+		</h:panelGrid>
+	</h:form>
+</h:body> 
+</html>

@@ -10,11 +10,10 @@ import javax.faces.bean.SessionScoped;
 public class ControlePrincipal implements Serializable {
 
 	private String mensagem;
-	
-	public String home(){
+
+	public String home() {
 		return "/index.xhtml";
 	}
-
 
 	public String getMensagem() {
 		return mensagem;
