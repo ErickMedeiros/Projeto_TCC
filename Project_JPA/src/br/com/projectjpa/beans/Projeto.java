@@ -46,7 +46,7 @@ public class Projeto implements Serializable{
 	@NotEmpty(message="A decrição deve ser informada")
 	@Column(name="DESCRICAO", nullable=false)
 	@Lob
-	private String descricao_projeto;
+	private String descricao;
 	@NotNull(message="Data de inicio deve ser informada")
 	@Column(name="INICIO", nullable=false)
 	@Temporal(TemporalType.DATE)
@@ -85,12 +85,12 @@ public class Projeto implements Serializable{
 		this.nome = nome;
 	}
 	
-	public String getDescricao_projeto() {
-		return descricao_projeto;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricao_projeto(String descricao_projeto) {
-		this.descricao_projeto = descricao_projeto;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Calendar getInicio() {

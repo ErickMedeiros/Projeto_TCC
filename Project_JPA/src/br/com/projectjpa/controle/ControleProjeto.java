@@ -1,12 +1,14 @@
 package br.com.projectjpa.controle;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-
+import br.com.projectjpa.beans.Funcionario;
 import br.com.projectjpa.beans.Projeto;
+import br.com.projectjpa.beans.ProjetoFuncionario;
 import br.com.projectjpa.conversores.ConverterFuncionario;
 import br.com.projectjpa.conversores.ConverterSetor;
 import br.com.projectjpa.model.FuncionarioDAO;
@@ -23,6 +25,12 @@ public class ControleProjeto implements Serializable{
 	private ConverterFuncionario converterFuncionario;
 	private SetorDAO daoSetor;
 	private ConverterSetor converterSetor;
+	private Funcionario funcionario;
+	private Integer cargaHoraria;
+	private Boolean gestor;
+	private Calendar inicioParticipacao;
+	private Calendar fimParticipacao;
+	private Boolean addFunc = false;
 	
 	public ControleProjeto(){
 		dao = new ProjetoDAO();
@@ -38,16 +46,20 @@ public class ControleProjeto implements Serializable{
 	
 	public String novo(){
 		objeto = new Projeto();
+		addFunc = false;
 		return "form";		
 	}
 	
 	public String cancelar(){
+		addFunc = false;
+		dao.roolback();
 		return "listar";
 	}
 	
 	public String gravar(){
 		if (dao.gravar(objeto)){
-			return "listar";
+			addFunc = false;
+			return "listar";			
 		}else{
 			return "form";
 		}
@@ -55,12 +67,41 @@ public class ControleProjeto implements Serializable{
 	
 	public String alterar(Projeto obj){
 		objeto = obj;
+		addFunc = false;
 		return "form";
 	}
 	
 	public String excluir(Projeto obj){
 		dao.excluir(obj);
 		return "listar";
+	}
+	
+	public void removerFuncionario(ProjetoFuncionario obj){
+		objeto.removerFuncionario(obj);
+	}
+	
+	public void adicionarFuncionario(){
+		addFunc = true;
+	}
+	
+	public void cancelarFuncionario(){
+		addFunc = false;
+	}
+	
+	public void salvarFuncionario(){
+		ProjetoFuncionario obj = new ProjetoFuncionario();
+		obj.setCargaHoraria(cargaHoraria);
+		obj.setFuncionario(funcionario);
+		obj.setInicioParticipacao(inicioParticipacao);
+		obj.setFimParticipacao(fimParticipacao);
+		obj.setGestor(gestor);
+		objeto.adicionarFuncionario(obj);
+		addFunc = false;	
+		cargaHoraria = null;
+		funcionario = null;
+		inicioParticipacao = null;
+		fimParticipacao = null;
+		gestor = null;
 	}
 
 	public ProjetoDAO getDao() {
@@ -109,6 +150,54 @@ public class ControleProjeto implements Serializable{
 
 	public void setConverterSetor(ConverterSetor converterSetor) {
 		this.converterSetor = converterSetor;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Integer getCargaHoraria() {
+		return cargaHoraria;
+	}
+
+	public void setCargaHoraria(Integer cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
+	}
+
+	public Boolean getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Boolean gestor) {
+		this.gestor = gestor;
+	}
+
+	public Calendar getInicioParticipacao() {
+		return inicioParticipacao;
+	}
+
+	public void setInicioParticipacao(Calendar inicioParticipacao) {
+		this.inicioParticipacao = inicioParticipacao;
+	}
+
+	public Calendar getFimParticipacao() {
+		return fimParticipacao;
+	}
+
+	public void setFimParticipacao(Calendar fimParticipacao) {
+		this.fimParticipacao = fimParticipacao;
+	}
+
+	public Boolean getAddFunc() {
+		return addFunc;
+	}
+
+	public void setAddFunc(Boolean addFunc) {
+		this.addFunc = addFunc;
 	}
 	
 	

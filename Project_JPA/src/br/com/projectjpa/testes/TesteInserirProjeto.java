@@ -21,7 +21,7 @@ public class TesteInserirProjeto {
 		Funcionario func = em.find(Funcionario.class, 1);
 		Projeto projeto = new Projeto();
 		projeto.setNome("Projeto JSF");
-		projeto.setDescricao_projeto("Meu novo projeto JSF");
+		projeto.setDescricao("Meu novo projeto JSF");
 		projeto.setInicio(Calendar.getInstance());
 		projeto.setFim(Calendar.getInstance());
 		projeto.setAtivo(true);
