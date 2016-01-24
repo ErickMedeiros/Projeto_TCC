@@ -18,7 +18,7 @@ public class SetorDAO {
 	}
 	
 	public List<Setor> listarTodos(){
-		return em.createQuery("from Setor order by nome").getResultList();
+		return em.createQuery("from Setor order by id").getResultList();
 	}
 
 	public boolean gravar(Setor obj){

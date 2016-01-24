@@ -44,7 +44,7 @@ public class Projeto implements Serializable{
 	private String nome;
 	@Type(type="org.hibernate.type.StringClobType")
 	@NotEmpty(message="A decrição deve ser informada")
-	@Column(name="DESCRICAO_PROJETO", nullable=false)
+	@Column(name="DESCRICAO", nullable=false)
 	@Lob
 	private String descricao_projeto;
 	@NotNull(message="Data de inicio deve ser informada")

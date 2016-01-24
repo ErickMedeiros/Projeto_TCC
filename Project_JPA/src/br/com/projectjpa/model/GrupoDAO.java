@@ -18,7 +18,7 @@ public class GrupoDAO {
 	}
 	
 	public List<Grupo> listarTodos(){
-		return em.createQuery("from Grupo order by nome").getResultList();
+		return em.createQuery("from Grupo order by id").getResultList();
 	}
 	
 	public boolean gravar (Grupo obj){

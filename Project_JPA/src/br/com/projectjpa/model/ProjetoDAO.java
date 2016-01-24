@@ -19,7 +19,7 @@ public class ProjetoDAO {
 	}
 	
 	public List<Projeto> listarTodos(){
-		return em.createQuery("from Projeto order by nome").getResultList();
+		return em.createQuery("from Projeto order by id").getResultList();
 	}
 
 	public boolean gravar(Projeto obj){

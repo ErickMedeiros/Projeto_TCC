@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-<h:head><title>Listagem de Projetos</title></h:head> 
+<h:head><title>Lista de Projetos</title></h:head> 
 <h:body> 
 	<h:form>
 		<h:commandLink action="/index?faces-redirect=true" value="Inicio" />
@@ -15,10 +15,6 @@
 				<h:commandButton action="#{controleProjeto.novo()}" 
 					value="Novo Registro" />			
 			</f:facet>
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				#{obj.id}
-			</h:column>
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
 				#{obj.nome}
