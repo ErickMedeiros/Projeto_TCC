@@ -21,6 +21,7 @@ import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
 
 
+
 @ManagedBean(name="controleFuncionario")
 @SessionScoped
 public class ControleFuncionario implements Serializable{

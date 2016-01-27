@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+
 @Entity
 @Table(name="SETOR")
 public class Setor implements Serializable{

@@ -9,6 +9,7 @@ import javax.faces.convert.Converter;
 import br.com.projectjpa.beans.Funcionario;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 
+
 public class ConverterFuncionario implements Converter, Serializable {
 
 	// converte da tela para o objeto 

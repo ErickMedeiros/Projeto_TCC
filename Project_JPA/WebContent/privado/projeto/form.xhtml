@@ -2,10 +2,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head>
 	<title>Edição de Projetos</title>
+	<script type="text/javascript">
+		PrimeFaces.locales['pt_BR'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 1,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			currentText : 'Data Atual',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo Dia'
+		};
+	</script>
 	<h:outputScript library="js" name="scripts.js" />
 </h:head>
 <h:body>
@@ -30,18 +64,15 @@
 				<h:outputLabel value="Descrição" />
 				<h:inputTextarea value="#{controleProjeto.objeto.descricao}"
 					rows="5" cols="60" />
-				<h:outputLabel value="Inicio" />
-				<h:inputText value="#{controleProjeto.objeto.inicio}" size="12"
-					onkeydown="Mascara(this,Data);" onkeyup="Mascara(this,Data);"
-					onkeypress="Mascara(this,Data);">
+				<p:outputLabel value="Início"/>
+				<p:calendar value="#{controleProjeto.objeto.inicio}" pattern="dd/MM/yyyy" locale="pt_BR">
 					<f:converter converterId="converterCalendar" />
-				</h:inputText>
-				<h:outputLabel value="Fim" />
-				<h:inputText value="#{controleProjeto.objeto.fim}" size="12"
-					onkeydown="Mascara(this,Data);" onkeyup="Mascara(this,Data);"
-					onkeypress="Mascara(this,Data);">
+			   </p:calendar>
+				<p:outputLabel value="Fim"/>
+				<p:calendar value="#{controleProjeto.objeto.fim}"
+					pattern="dd/MM/yyyy" locale="pt_BR">
 					<f:converter converterId="converterCalendar" />
-				</h:inputText>
+				</p:calendar>
 				<h:outputLabel value="Ativo" />
 				<h:selectBooleanCheckbox value="#{controleProjeto.objeto.ativo}" />
 				<h:outputLabel value="Setor" />

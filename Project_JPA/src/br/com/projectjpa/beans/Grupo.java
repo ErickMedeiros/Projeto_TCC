@@ -15,6 +15,7 @@ import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+
 @Entity
 @Table(name="GRUPO")
 public class Grupo implements Serializable {

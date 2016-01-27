@@ -18,7 +18,7 @@ public class FuncionarioDAO {
 	}
 	
 	public List<Funcionario> listarTodos(){
-		return em.createQuery("from Funcionario order by id").getResultList();
+		return em.createQuery("from Funcionario order by nome").getResultList();
 	}
 	
 	public boolean gravar (Funcionario obj){

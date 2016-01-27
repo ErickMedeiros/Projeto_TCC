@@ -17,6 +17,7 @@ public class SetorDAO {
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
+	
 	public List<Setor> listarTodos(){
 		return em.createQuery("from Setor order by id").getResultList();
 	}

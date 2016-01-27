@@ -27,6 +27,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+
 @Entity
 @Table(name = "FUNCIONARIO")
 public class Funcionario implements Serializable {
