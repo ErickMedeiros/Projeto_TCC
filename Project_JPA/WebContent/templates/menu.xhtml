@@ -3,24 +3,40 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:compo="http://java.sun.com/jsf/composite/compo">
 
 
 
 <h:form>
-	<h:panelGrid columns="1">
-		<h:commandLink value="Funcionário" action="#{controleFuncionario.listar()}" />
+
+	<p:growl id="growl" life="2000" />
+
+	<h:panelGrid>
+		<p:commandLink id="idfunc" update="growl"
+			action="#{controleFuncionario.listar()}">
+			<h:outputText value="Funcionário" />
+		</p:commandLink>
 	</h:panelGrid>
-	<h:panelGrid columns="1">
-		<h:commandLink value="Projeto" action="#{controleProjeto.listar()}" />
+	<h:panelGrid>
+		<p:commandLink id="idprojetos" action="#{controleProjeto.listar()}"
+			ajax="false">
+			<h:outputText value="Projetos" />
+		</p:commandLink>
 	</h:panelGrid>
-	<h:panelGrid columns="1">
-		<h:commandLink value="Grupo" action="#{controleGrupo.listar()}" />
+	<h:panelGrid>
+		<p:commandLink id="idgrupo" action="#{controleGrupo.listar()}"
+			ajax="false">
+			<h:outputText value="Grupo" />
+		</p:commandLink>
 	</h:panelGrid>
-	<h:panelGrid columns="1">
-		<h:commandLink value="Setor" action="#{controleSetor.listar()}" />
+	<h:panelGrid>
+		<p:commandLink id="idsetor" action="#{controleSetor.listar()}"
+			ajax="false">
+			<h:outputText value="Setor" />
+		</p:commandLink>
 	</h:panelGrid>
-	
+
 </h:form>
 
 </html>
