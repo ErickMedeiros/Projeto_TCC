@@ -21,8 +21,9 @@ import javax.validation.constraints.NotNull;
 public class ProjetoFuncionario implements Serializable {
 	@Id
 	@Column(name = "ID")
-	@SequenceGenerator(name = "SEQ_PROJ_FUNC", sequenceName = "GEN_PRO_FUNC_ID", allocationSize = 1)
-	@GeneratedValue(generator = "SEQ_PROJ_FUNC", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "SEQ_FUNC_PROJ", sequenceName = "GEN_FUNC_PROJ_ID", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_FUNC_PROJ" )
+
 	private Integer id;
 	
 	@NotNull(message = "A carga horária deve ser informada")

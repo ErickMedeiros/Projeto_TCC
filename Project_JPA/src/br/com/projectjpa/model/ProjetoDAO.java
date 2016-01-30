@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.projectjpa.beans.Grupo;
 import br.com.projectjpa.beans.Projeto;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 import br.com.projectjpa.util.UtilErros;

@@ -34,7 +34,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Projeto implements Serializable{
 	@Id
 	@Column(name="ID")
-	@SequenceGenerator(name="SEQ_PROJ",sequenceName="GEN_PRO_ID", allocationSize=1 )
+	@SequenceGenerator(name="SEQ_PROJ",sequenceName="GEN_PROJ_ID", allocationSize=1 )
 	@GeneratedValue(generator="SEQ_PROJ", strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	@NotEmpty(message="O nome deve ser informado")
