@@ -17,6 +17,7 @@ public class FuncionarioDAO {
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Funcionario> listarTodos(){
 		return em.createQuery("from Funcionario order by nome").getResultList();
 	}

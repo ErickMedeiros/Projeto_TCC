@@ -9,6 +9,7 @@ import br.com.projectjpa.beans.Grupo;
 import br.com.projectjpa.model.GrupoDAO;
 
 
+@SuppressWarnings("serial")
 @ManagedBean(name="controleGrupo")
 @SessionScoped
 public class ControleGrupo implements Serializable{

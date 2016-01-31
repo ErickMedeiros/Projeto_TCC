@@ -28,6 +28,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "FUNCIONARIO")
 public class Funcionario implements Serializable {

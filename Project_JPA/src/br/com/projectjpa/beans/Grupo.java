@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="GRUPO")
 public class Grupo implements Serializable {

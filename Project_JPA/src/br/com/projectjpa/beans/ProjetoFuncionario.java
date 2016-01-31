@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "PROJETO_FUNCIONARIO")
 public class ProjetoFuncionario implements Serializable {

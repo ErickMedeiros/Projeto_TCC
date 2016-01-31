@@ -29,6 +29,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="PROJETO")
 public class Projeto implements Serializable{

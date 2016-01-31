@@ -22,6 +22,7 @@ import br.com.projectjpa.util.UtilMensagens;
 
 
 
+@SuppressWarnings("serial")
 @ManagedBean(name="controleFuncionario")
 @SessionScoped
 public class ControleFuncionario implements Serializable{

@@ -17,6 +17,7 @@ public class ProjetoDAO {
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Projeto> listarTodos(){
 		return em.createQuery("from Projeto order by id").getResultList();
 	}

@@ -9,6 +9,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.FaceletContext;
 
+@SuppressWarnings({ "serial", "unused" })
 @ManagedBean(name = "controleLocale")
 @RequestScoped
 public class ControleLocale implements Serializable {

@@ -17,6 +17,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
+@SuppressWarnings({ "serial", "unused" })
 @Entity
 @Table(name="SETOR")
 public class Setor implements Serializable{

@@ -10,6 +10,7 @@ import br.com.projectjpa.beans.Funcionario;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 
 
+@SuppressWarnings("serial")
 public class ConverterFuncionario implements Converter, Serializable {
 
 	// converte da tela para o objeto 

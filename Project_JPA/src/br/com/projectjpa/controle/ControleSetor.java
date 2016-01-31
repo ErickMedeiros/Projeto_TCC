@@ -10,6 +10,7 @@ import br.com.projectjpa.beans.Setor;
 import br.com.projectjpa.model.SetorDAO;
 
 
+@SuppressWarnings("serial")
 @ManagedBean(name="controleSetor")
 @SessionScoped
 public class ControleSetor implements Serializable{

@@ -9,6 +9,7 @@ import javax.faces.convert.Converter;
 import br.com.projectjpa.beans.Grupo;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 
+@SuppressWarnings("serial")
 public class ConverterGrupo implements Converter, Serializable {
 
 	// Converte da view para o objeto

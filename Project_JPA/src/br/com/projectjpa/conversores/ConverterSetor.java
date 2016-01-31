@@ -6,10 +6,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-import br.com.projectjpa.beans.Grupo;
+
 import br.com.projectjpa.beans.Setor;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 
+@SuppressWarnings("serial")
 public class ConverterSetor implements Converter, Serializable {
 
 	// converte da tela para o objeto 
