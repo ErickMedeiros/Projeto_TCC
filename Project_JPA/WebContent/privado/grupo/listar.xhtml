@@ -9,12 +9,49 @@
 	<h:form>
 	<h:commandLink action="/index?faces-redirect=true" value="Inicio" />
 		<h:messages />
-		<h:dataTable value="#{controleGrupo.dao.listarTodos()}" var="obj"
+		<h:panelGrid columns="6">
+			<h:selectOneMenu value="#{controleGrupo.dao.ordem}">
+				<f:selectItem itemLabel="ID" itemValue="id"/>
+				<f:selectItem itemLabel="Nome" itemValue="nome"/>
+				<f:ajax execute="@form" render="@form"/>
+			</h:selectOneMenu>
+			<h:outputLabel value="Filtro" />
+			<h:inputText value="#{controleGrupo.dao.filtro}">
+				<f:ajax execute="@form" render="@form" event="keyup"/>
+			</h:inputText>
+			<h:outputLabel value="Máximo Objetos" />
+			<h:inputText value="#{controleGrupo.dao.maximoObjetos}" size="3">
+				<f:ajax execute="@form" render="@form" event="keyup"/>
+			</h:inputText>
+		</h:panelGrid>
+		<h:dataTable value="#{controleGrupo.dao.listar()}" var="obj"
 			frame="box" rules="all" cellpadding="3">
 			<f:facet name="header">
 				<h:commandButton action="#{controleGrupo.novo()}" 
 					value="Novo Grupo" />			
 			</f:facet>
+			<f:facet name="header">Listagem de Grupos</f:facet>
+			<f:facet name="footer">
+			 <div align="center">
+			  <h:outputLabel value="#{controleGrupo.dao.mensagemNavegacao}" />
+			  <h:commandButton action="#{controleGrupo.dao.primeiro()}" value="Primeiro">
+			  <f:ajax execute="@form" render="@form"/>
+			  </h:commandButton>
+			  <h:commandButton action="#{controleGrupo.dao.anterior()}" value="Anterior">
+			  <f:ajax execute="@form" render="@form"/>
+			  </h:commandButton>
+			  <h:commandButton action="#{controleGrupo.dao.proximo()}" value="Próximo">
+			  <f:ajax execute="@form" render="@form"/>
+			  </h:commandButton>
+			  <h:commandButton action="#{controleGrupo.dao.ultimo()}" value="Último">
+			  <f:ajax execute="@form" render="@form"/>
+			  </h:commandButton>
+			 </div>
+			</f:facet>
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{obj.id}
+			</h:column>		
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
 				#{obj.nome}
