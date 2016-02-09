@@ -10,7 +10,7 @@ import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
 
 public class GrupoDAO {
-
+	
 	private EntityManager em;
 	private String ordem = "id";
 	private String filtro = "";
@@ -29,7 +29,7 @@ public class GrupoDAO {
 			if (ordem.equals("id")){
 				try {
 					Integer.parseInt(filtro);
-					where  = " where " + ordem + " = '"+filtro+"' ";
+					where  = " where "+ ordem + " = '"+filtro+"' ";
 				}catch(Exception e){
 					
 				}
@@ -37,7 +37,7 @@ public class GrupoDAO {
 				where = " where upper("+ordem+") like '"+filtro.toUpperCase()+ "%' ";
 			}			
 		}
-		String jpql = "from Grupo "+ where + " order by "+ordem;
+		String jpql = "from Grupo "+ where +" order by "+ordem;
 		totalObjetos = em.createQuery("select id from Grupo "+ where +
 				" order by "+ordem).getResultList().size();
 		return em.createQuery(jpql).
@@ -80,53 +80,52 @@ public class GrupoDAO {
 				" até "+ ate + " de " +totalObjetos+ " registros";
 	}
 	
-	
 	@SuppressWarnings("unchecked")
 	public List<Grupo> listarTodos(){
-		return em.createQuery("from Grupo order by id").getResultList();
+		return em.createQuery("from Grupo order by nome").getResultList();
 	}
-	
-	public boolean gravar (Grupo obj){
-		try{
+
+	public boolean gravar(Grupo obj){
+		try {
 			em.getTransaction().begin();
 			if (obj.getId() == null){
 				em.persist(obj);
-			} else{
+			} else {
 				em.merge(obj);
 			}
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dados gravados com sucesso!");
+			UtilMensagens.mensagemInformacao("Objeto persistido com sucesso!");
 			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao gravar dados no banco"+
-			UtilErros.getMensagemErro(e));
-			return false;
-		}
-	}
-
-	public boolean excluir (Grupo obj){
-		try{
-			em.getTransaction().begin();
-			em.remove(obj);
-			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dado excluído com sucesso!");
-			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
-				em.getTransaction().begin();
-			}
-			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao excluir dados no banco"+
-			UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
 	
-	public Grupo localizar (Integer id){
+	public boolean excluir(Grupo obj){
+		try {
+			em.getTransaction().begin();
+			em.remove(obj);
+			em.getTransaction().commit();
+			UtilMensagens.mensagemInformacao("Objeto removido com sucesso!");
+			return true;
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
+				em.getTransaction().begin();
+			}
+			em.getTransaction().rollback();
+			UtilMensagens.mensagemErro("Erro ao remover objeto: "+
+			                                  UtilErros.getMensagemErro(e));
+			return false;
+		}
+	}	
+	
+	public Grupo localizar(Integer id){
 		return em.find(Grupo.class, id);
 	}
 	
@@ -154,12 +153,12 @@ public class GrupoDAO {
 		this.filtro = filtro;
 	}
 
-	public Integer getMaximoObjetos() {
+	public Integer getMaximosObjetos() {
 		return maximosObjetos;
 	}
 
-	public void setMaximoObjetos(Integer maximoObjetos) {
-		this.maximosObjetos = maximoObjetos;
+	public void setMaximosObjetos(Integer maximosObjetos) {
+		this.maximosObjetos = maximosObjetos;
 	}
 
 	public Integer getPosicaoAtual() {
@@ -177,6 +176,5 @@ public class GrupoDAO {
 	public void setTotalObjetos(Integer totalObjetos) {
 		this.totalObjetos = totalObjetos;
 	}
-	
-	
+
 }

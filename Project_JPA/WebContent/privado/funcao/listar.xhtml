@@ -5,46 +5,46 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"> 
 
-<h:head><title>Listagem de Grupos</title></h:head> 
+<h:head><title>Lista de Funções</title></h:head> 
 <h:body> 
 	<h:form>
 		<h:messages />
 		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
-		<h:commandLink action="#{controleGrupo.novo()}" value="Novo Grupo" />
+		<h:commandLink action="#{controleFuncao.novo()}" value="Nova Funcão" />
 		<h:panelGrid columns="5">
-			<h:selectOneMenu value="#{controleGrupo.dao.ordemAtual}"
-				converter="#{controleGrupo.dao.converterOrdem}">
-					<f:selectItems value="#{controleGrupo.dao.listaOrdem}"/>
+			<h:selectOneMenu value="#{controleFuncao.dao.ordemAtual}"
+				converter="#{controleFuncao.dao.converterOrdem}">
+					<f:selectItems value="#{controleFuncao.dao.listaOrdem}"/>
 					<f:ajax execute="@form" render="@form"/>
 			</h:selectOneMenu>
 			<h:outputLabel value="Filtro" />
-			<h:inputText value="#{controleGrupo.dao.filtro}" >
+			<h:inputText value="#{controleFuncao.dao.filtro}" >
 				<f:ajax execute="@form" render="@form" event="keyup"/>
 			</h:inputText>
 			<h:outputLabel value="Maximo objetos" />
-			<h:inputText value="#{controleGrupo.dao.maximoObjetos}" >
+			<h:inputText value="#{controleFuncao.dao.maximoObjetos}" >
 				<f:ajax execute="@form" render="@form" event="keyup"/>
 			</h:inputText>			
 		</h:panelGrid>
-		<h:dataTable value="#{controleGrupo.dao.listar()}" var="obj"
+		<h:dataTable value="#{controleFuncao.dao.listar()}" var="obj"
 			frame="box" rules="all" cellpadding="3">
-			<f:facet name="heaxer">Listagem de Grupos</f:facet>
+			<f:facet name="heaxer">Lista de Funções</f:facet>
 			<f:facet name="footer">
 				<div align="center">
-					<h:outputLabel value="#{controleGrupo.dao.mensagemNavegacao}" /><br/>
-					<h:commandButton action="#{controleGrupo.dao.primeiro()}" 
+					<h:outputLabel value="#{controleFuncao.dao.mensagemNavegacao}" /><br/>
+					<h:commandButton action="#{controleFuncao.dao.primeiro()}" 
 					value="Primeiro" >
 						<f:ajax execute="@form" render="@form"/>
 					</h:commandButton>
-					<h:commandButton action="#{controleGrupo.dao.anterior()}" 
+					<h:commandButton action="#{controleFuncao.dao.anterior()}" 
 					value="Anterior" >
 						<f:ajax execute="@form" render="@form"/>
 					</h:commandButton>					
-					<h:commandButton action="#{controleGrupo.dao.proximo()}" 
+					<h:commandButton action="#{controleFuncao.dao.proximo()}" 
 					value="Proximo" >
 						<f:ajax execute="@form" render="@form"/>
 					</h:commandButton>	
-					<h:commandButton action="#{controleGrupo.dao.ultimo()}" 
+					<h:commandButton action="#{controleFuncao.dao.ultimo()}" 
 					value="Ultimo" >
 						<f:ajax execute="@form" render="@form"/>
 					</h:commandButton>									
@@ -60,12 +60,12 @@
 			</h:column>		
 			<h:column>
 				<f:facet name="header">Alterar</f:facet>
-				<h:commandLink action="#{controleGrupo.alterar(obj)}" value="Alterar" />
+				<h:commandLink action="#{controleFuncao.alterar(obj)}" value="Alterar" />
 			</h:column>	
 			<h:column>
 				<f:facet name="header">Excluir</f:facet>
-				<h:commandLink action="#{controleGrupo.excluir(obj)}" value="Excluir"
-					onclick="if (!confirm('Confirme a exclusão do Grupo?')) return false" />
+				<h:commandLink action="#{controleFuncao.excluir(obj)}" value="Excluir"
+					onclick="if (!confirm('Confirme a exclusão da Função?')) return false" />
 			</h:column>								
 		</h:dataTable>
 	

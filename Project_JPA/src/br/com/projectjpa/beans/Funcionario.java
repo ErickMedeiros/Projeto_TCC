@@ -80,6 +80,12 @@ public class Funcionario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "SETOR", referencedColumnName = "ID", nullable = false)
 	private Setor setor;
+	@NotNull(message = "A função deve ser informada")
+	@ManyToOne
+	@JoinColumn(name = "FUNCAO", referencedColumnName = "ID", nullable = false)
+	private Funcao funcao;
+	
+	
 	@Transient
 	private StreamedContent imagem;
 
@@ -165,6 +171,15 @@ public class Funcionario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+
+	public Funcao getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
 	}
 
 	public Grupo getGrupo() {

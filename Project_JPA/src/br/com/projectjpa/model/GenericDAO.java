@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
+import br.com.projectjpa.beans.Funcionario;
+import br.com.projectjpa.beans.Funcao;
+import br.com.projectjpa.beans.Grupo;
+import br.com.projectjpa.beans.Setor;
 import br.com.projectjpa.conversores.ConverterOrdem;
 import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
@@ -25,6 +29,21 @@ public class GenericDAO<T> implements Serializable {
 	private int totalObjetos = 0;
 	private ConverterOrdem converterOrdem;
 	
+	public List<Funcionario> listarTodosFuncionarios(){
+		return em.createQuery("from Funcionario order by nome").getResultList();
+	}
+	
+	public List<Funcao> listarTodosFuncao(){
+		return em.createQuery("from Funcao order by nome").getResultList();
+	}
+	
+	public List<Grupo> listarTodosGrupo(){
+		return em.createQuery("from Grupo order by nome").getResultList();
+	}
+	
+	public List<Setor> listarTodosSetor(){
+		return em.createQuery("from Setor order by nome").getResultList();
+	}
 	
 	public void iniciarTransacao(){
 		if (em.getTransaction().isActive() == false){

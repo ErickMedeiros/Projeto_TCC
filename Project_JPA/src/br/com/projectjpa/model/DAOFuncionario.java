@@ -1,50 +1,55 @@
 package br.com.projectjpa.model;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
-import br.com.projectjpa.beans.Grupo;
-import br.com.projectjpa.beans.Setor;
+
+import br.com.projectjpa.beans.Funcionario;
+import br.com.projectjpa.conversores.ConverterOrdem;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
 
-public class SetorDAO {
-	
+@SuppressWarnings("serial")
+public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{ 
+
 	private EntityManager em;
 	
-	public SetorDAO(){
-		em = EntityManagerUtil.getEntityManager();
+	public DAOFuncionario(){
+		super.setClasse(Funcionario.class);
+		super.setEm(EntityManagerUtil.getEntityManager());
+		super.getListaOrdem().add(new Ordem("Código", "id"));
+		super.getListaOrdem().add(new Ordem("Nome", "nome"));
+		super.setOrdemAtual((Ordem) super.getListaOrdem().get(1));
+		super.setFiltro("");
+		super.setMaximoObjetos(2);
+		super.setConverterOrdem(new ConverterOrdem(super.getListaOrdem()));
 	}
 	
-	public List<Setor> listarTodos(){
-		return em.createQuery("from Setor order by nome").getResultList();
-	}
-
-	public boolean gravar(Setor obj){
-		try {
+	public boolean gravar (Funcionario obj){
+		try{
 			em.getTransaction().begin();
 			if (obj.getId() == null){
 				em.persist(obj);
-			} else {
+			} else{
 				em.merge(obj);
 			}
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Objeto persistido com sucesso!");
+			UtilMensagens.mensagemInformacao("Dados gravados com sucesso!");
 			return true;
-		} catch (Exception e){
-			if (em.getTransaction().isActive() == false){
+		} catch (Exception e) {
+			if(em.getTransaction().isActive()== false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
-			                                  UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao gravar dados no banco"+
+			UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
-	
-	public boolean excluir(Setor obj){
+
+	public boolean excluir(Funcionario obj){
 		try {
 			em.getTransaction().begin();
 			em.remove(obj);
@@ -62,8 +67,8 @@ public class SetorDAO {
 		}
 	}	
 	
-	public Setor localizar(Integer id){
-		return em.find(Setor.class, id);
+	public Funcionario localizar (Integer id){
+		return em.find(Funcionario.class, id);
 	}
 	
 	public EntityManager getEm() {
@@ -73,5 +78,5 @@ public class SetorDAO {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-
+	
 }

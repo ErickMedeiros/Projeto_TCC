@@ -11,9 +11,10 @@ import br.com.projectjpa.beans.Projeto;
 import br.com.projectjpa.beans.ProjetoFuncionario;
 import br.com.projectjpa.conversores.ConverterFuncionario;
 import br.com.projectjpa.conversores.ConverterSetor;
-import br.com.projectjpa.model.FuncionarioDAO;
+import br.com.projectjpa.model.DAOFuncionario;
+import br.com.projectjpa.model.DAOSetor;
 import br.com.projectjpa.model.ProjetoDAO;
-import br.com.projectjpa.model.SetorDAO;
+
 
 
 @SuppressWarnings("serial")
@@ -22,9 +23,9 @@ import br.com.projectjpa.model.SetorDAO;
 public class ControleProjeto implements Serializable{
 	private ProjetoDAO dao;
 	private Projeto objeto;
-	private FuncionarioDAO daoFuncionario;
+	private DAOFuncionario daoFuncionario;
 	private ConverterFuncionario converterFuncionario;
-	private SetorDAO daoSetor;
+	private DAOSetor daoSetor;
 	private ConverterSetor converterSetor;
 	private Funcionario funcionario;
 	private Integer cargaHoraria;
@@ -35,9 +36,9 @@ public class ControleProjeto implements Serializable{
 	
 	public ControleProjeto(){
 		dao = new ProjetoDAO();
-		daoFuncionario = new FuncionarioDAO();
+		daoFuncionario = new DAOFuncionario();
 		converterFuncionario = new ConverterFuncionario();
-		daoSetor = new SetorDAO();
+		daoSetor = new DAOSetor();
 		converterSetor = new ConverterSetor();
 	}
 	
@@ -121,13 +122,7 @@ public class ControleProjeto implements Serializable{
 		this.objeto = objeto;
 	}
 
-	public FuncionarioDAO getDaoFuncionario() {
-		return daoFuncionario;
-	}
-
-	public void setDaoFuncionario(FuncionarioDAO daoFuncionario) {
-		this.daoFuncionario = daoFuncionario;
-	}
+	
 
 	public ConverterFuncionario getConverterFuncionario() {
 		return converterFuncionario;
@@ -137,11 +132,21 @@ public class ControleProjeto implements Serializable{
 		this.converterFuncionario = converterFuncionario;
 	}
 
-	public SetorDAO getDaoSetor() {
+	
+
+	public DAOFuncionario getDaoFuncionario() {
+		return daoFuncionario;
+	}
+
+	public void setDaoFuncionario(DAOFuncionario daoFuncionario) {
+		this.daoFuncionario = daoFuncionario;
+	}
+
+	public DAOSetor getDaoSetor() {
 		return daoSetor;
 	}
 
-	public void setDaoSetor(SetorDAO daoSetor) {
+	public void setDaoSetor(DAOSetor daoSetor) {
 		this.daoSetor = daoSetor;
 	}
 

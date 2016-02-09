@@ -34,7 +34,7 @@
 			<h:outputLabel value="Email" />
 			<h:inputText value="#{controleFuncionario.objeto.email}" size="40"
 				maxlength="40" />
-			<h:outputLabel value="Salario" />
+			<h:outputLabel value="Salário" />
 			<h:inputText value="#{controleFuncionario.objeto.salario}" size="20"
 				maxlength="20" onkeydown="Mascara(this,Valor);"
 				onkeyup="Mascara(this,Valor);" onkeypress="Mascara(this,Valor);" />
@@ -51,25 +51,33 @@
 				size="20" maxlength="20" />
 			<h:outputLabel value="Senha" />
 			<h:inputSecret value="#{controleFuncionario.objeto.senha}" size="10"
-				maxlength="10" redisplay="true" />
+				maxlength="10" redisplay="true" />			
+			<h:outputLabel value="Função" />
+			<h:selectOneMenu value="#{controleFuncionario.objeto.funcao}"
+				converter="#{controleFuncionario.converterFuncao}">
+				<f:selectItem itemLabel="Selecione uma Função"
+					noSelectionOption="true" />
+				<f:selectItems value="#{controleFuncionario.dao.listarTodosFuncao()}" />
+			</h:selectOneMenu>
+				
 			<h:outputLabel value="Grupo" />
 			<h:selectOneMenu value="#{controleFuncionario.objeto.grupo}"
 				converter="#{controleFuncionario.converterGrupo}">
 				<f:selectItem itemLabel="Selecione um grupo"
 					noSelectionOption="true" />
-				<f:selectItems value="#{controleFuncionario.daoGrupo.listarTodos()}" />
+				<f:selectItems value="#{controleFuncionario.dao.listarTodosGrupo()}" />
 			</h:selectOneMenu>
 			<h:outputLabel value="Setor" />
 			<h:selectOneMenu value="#{controleFuncionario.objeto.setor}"
 				converter="#{controleFuncionario.converterSetor}">
 				<f:selectItem itemLabel="Selecione um setor"
 					noSelectionOption="true" />
-				<f:selectItems value="#{controleFuncionario.daoSetor.listarTodos()}" />
+				<f:selectItems value="#{controleFuncionario.dao.listarTodosSetor()}" />
 			</h:selectOneMenu>
 			<h:outputLabel value="Foto:" />
 			<p:fileUpload id="uploadImagem" mode="advanced"
 				update="messages,imagem" auto="true" label="Selecionar"
-				fileUploadListener="#{controleFuncionario.enviarFoto}"
+				fileUploadListener="#{controleFuncionario.enviarFoto()}"
 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 			<h:outputLabel value="" />
 			<p:graphicImage value="#{controleFuncionario.objeto.imagem}"

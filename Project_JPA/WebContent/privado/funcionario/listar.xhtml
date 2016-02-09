@@ -1,26 +1,63 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
 
-<h:head>
-	<title>Lista de Funcionários</title>
-</h:head>
-<h:body>
+<h:head><title>Lista de Funcionários</title></h:head> 
+<h:body> 
 	<h:form>
-	<h:commandLink action="/index?faces-redirect=true" value="Inicio" />
 		<h:messages />
-		<h:dataTable value="#{controleFuncionario.dao.listarTodos()}"
-			var="obj" frame="box" rules="all" cellpadding="3">
-			<f:facet name="header">
-				<h:commandButton value="Novo Funcionário"
-					action="#{controleFuncionario.novo()}" />
+		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
+		<h:commandLink action="#{controleFuncionario.novo()}" value="Novo Funcionário" />
+		<h:panelGrid columns="6">
+			<h:selectOneMenu value="#{controleFuncionario.dao.ordemAtual}"
+				converter="#{controleFuncionario.dao.converterOrdem}">
+					<f:selectItems value="#{controleFuncionario.dao.listaOrdem}"/>
+					<f:ajax execute="@form" render="@form"/>
+			</h:selectOneMenu>
+			<h:outputLabel value="Filtro" />
+			<h:inputText value="#{controleFuncionario.dao.filtro}" >
+				<f:ajax execute="@form" render="@form" event="keyup"/>
+			</h:inputText>
+			<h:outputLabel value="Maximo objetos" />
+			<h:inputText value="#{controleFuncionario.dao.maximoObjetos}" >
+				<f:ajax execute="@form" render="@form" event="keyup"/>
+			</h:inputText>			
+		</h:panelGrid>
+		<h:dataTable value="#{controleFuncionario.dao.listar()}" var="obj"
+			frame="box" rules="all" cellpadding="3">
+			<f:facet name="heaxer">Lista de Funcionários</f:facet>
+			<f:facet name="footer">
+				<div align="center">
+					<h:outputLabel value="#{controleFuncionario.dao.mensagemNavegacao}" /><br/>
+					<h:commandButton action="#{controleFuncionario.dao.primeiro()}" 
+					value="Primeiro" >
+						<f:ajax execute="@form" render="@form"/>
+					</h:commandButton>
+					<h:commandButton action="#{controleFuncionario.dao.anterior()}" 
+					value="Anterior" >
+						<f:ajax execute="@form" render="@form"/>
+					</h:commandButton>					
+					<h:commandButton action="#{controleFuncionario.dao.proximo()}" 
+					value="Proximo" >
+						<f:ajax execute="@form" render="@form"/>
+					</h:commandButton>	
+					<h:commandButton action="#{controleFuncionario.dao.ultimo()}" 
+					value="Ultimo" >
+						<f:ajax execute="@form" render="@form"/>
+					</h:commandButton>									
+				</div>
 			</f:facet>
+			
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
 				#{obj.nome}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Função</f:facet>
+				#{obj.funcao.nome}
 			</h:column>
 			<h:column>
 				<f:facet name="header">Grupo</f:facet>

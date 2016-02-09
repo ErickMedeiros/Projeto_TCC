@@ -2,34 +2,36 @@ package br.com.projectjpa.controle;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
+
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedBean;
 
-import br.com.projectjpa.beans.Grupo;
-import br.com.projectjpa.beans.Setor;
-import br.com.projectjpa.model.DAOGrupo;
-import br.com.projectjpa.model.DAOSetor;
 
+import br.com.projectjpa.beans.Funcao;
+import br.com.projectjpa.model.DAOFuncao;
 
 
 @SuppressWarnings("serial")
-@ManagedBean(name="controleGrupo")
+@ManagedBean(name="controleFuncao")
 @SessionScoped
-public class ControleGrupo implements Serializable{
-	private DAOGrupo<Grupo> dao;
-	private Grupo objeto;
+
+public class ControleFuncao implements Serializable{
+
+	private DAOFuncao<Funcao> dao;
+	private Funcao objeto;
 	
-	public ControleGrupo(){
-		dao = new DAOGrupo<Grupo>();
+	
+	public ControleFuncao(){
+		dao = new DAOFuncao<Funcao>();
 		
 	}
 	
 	public String listar(){
-		return "/privado/grupo/listar?faces-redirect=true";
+		return "/privado/funcao/listar?faces-redirect=true";
 	}
 	
 	public String novo(){
-		objeto = new Grupo();
+		objeto = new Funcao();
 		return "form";		
 	}
 	
@@ -51,35 +53,35 @@ public class ControleGrupo implements Serializable{
 		}
 	}
 	
-	public String alterar(Grupo obj){
+	public String alterar(Funcao obj){
 		objeto = obj;
 		return "form";
 		
 	}
 	
-	public String excluir(Grupo obj){
+	public String excluir(Funcao obj){
 		dao.remove(obj);
 		return "form";
 	}
 
-	public DAOGrupo<Grupo> getDao() {
+	public DAOFuncao<Funcao> getDao() {
 		return dao;
 	}
 
-	public void setDao(DAOGrupo<Grupo> dao) {
+	public void setDao(DAOFuncao<Funcao> dao) {
 		this.dao = dao;
 	}
 
-	public Grupo getObjeto() {
+	public Funcao getObjeto() {
 		return objeto;
 	}
 
-	public void setObjeto(Grupo objeto) {
+	public void setObjeto(Funcao objeto) {
 		this.objeto = objeto;
 	}
 	
 	
 	
 	
-
+	
 }

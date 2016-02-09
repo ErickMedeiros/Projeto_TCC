@@ -13,9 +13,9 @@
 	<p:growl id="growl" life="2000" />
 
 	<h:panelGrid>
-		<p:commandLink id="idfunc" update="growl"
-			action="#{controleFuncionario.listar()}">
-			<h:outputText value="Funcionário" />
+		<p:commandLink id="idfuncionario" action="#{controleFuncionario.listar()}"
+			ajax="false">
+			<h:outputText value="Funcionários" />
 		</p:commandLink>
 	</h:panelGrid>
 	<h:panelGrid>
@@ -24,6 +24,15 @@
 			<h:outputText value="Projetos" />
 		</p:commandLink>
 	</h:panelGrid>
+	
+	<h:panelGrid>
+		<p:commandLink id="idfuncao" action="#{controleFuncao.listar()}"
+			ajax="false">
+			<h:outputText value="Função" />
+		</p:commandLink>
+	</h:panelGrid>
+	
+	
 	<h:panelGrid>
 		<p:commandLink id="idgrupo" action="#{controleGrupo.listar()}"
 			ajax="false">

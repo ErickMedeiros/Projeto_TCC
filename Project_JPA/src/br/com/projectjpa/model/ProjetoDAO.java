@@ -19,7 +19,7 @@ public class ProjetoDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Projeto> listarTodos(){
-		return em.createQuery("from Projeto order by id").getResultList();
+		return em.createQuery("from Projeto order by nome").getResultList();
 	}
 
 	public boolean gravar(Projeto obj){

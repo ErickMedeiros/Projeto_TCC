@@ -6,6 +6,7 @@
 		<class>br.com.projectjpa.beans.Setor</class>
 		<class>br.com.projectjpa.beans.ProjetoFuncionario</class>
 		<class>br.com.projectjpa.beans.Funcionario</class>
+		<class>br.com.projectjpa.beans.Funcao</class>
 		
 		<properties>
 			<property name="hibernate.connection.username" value="postgres"/>

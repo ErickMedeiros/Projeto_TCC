@@ -5,45 +5,45 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.projectjpa.beans.Funcionario;
+import br.com.projectjpa.beans.Grupo;
 import br.com.projectjpa.jpa.EntityManagerUtil;
 import br.com.projectjpa.util.UtilErros;
 import br.com.projectjpa.util.UtilMensagens;
 
 public class FuncionarioDAO {
-
+	
 	private EntityManager em;
 	
 	public FuncionarioDAO(){
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Funcionario> listarTodos(){
 		return em.createQuery("from Funcionario order by nome").getResultList();
 	}
-	
-	public boolean gravar (Funcionario obj){
-		try{
+
+	public boolean gravar(Funcionario obj){
+		try {
 			em.getTransaction().begin();
 			if (obj.getId() == null){
 				em.persist(obj);
-			} else{
+			} else {
 				em.merge(obj);
 			}
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dados gravados com sucesso!");
+			UtilMensagens.mensagemInformacao("Objeto persistido com sucesso!");
 			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao gravar dados no banco"+
-			UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
-
+	
 	public boolean excluir(Funcionario obj){
 		try {
 			em.getTransaction().begin();
@@ -62,7 +62,7 @@ public class FuncionarioDAO {
 		}
 	}	
 	
-	public Funcionario localizar (Integer id){
+	public Funcionario localizar(Integer id){
 		return em.find(Funcionario.class, id);
 	}
 	
@@ -73,6 +73,5 @@ public class FuncionarioDAO {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-	
+
 }
