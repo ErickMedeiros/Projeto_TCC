@@ -2,23 +2,28 @@ package br.com.projectjpa.controle;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
+
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedBean;
 
 
 import br.com.projectjpa.beans.Setor;
-import br.com.projectjpa.model.SetorDAO;
+import br.com.projectjpa.model.DAOSetor;
 
 
 @SuppressWarnings("serial")
 @ManagedBean(name="controleSetor")
 @SessionScoped
+
 public class ControleSetor implements Serializable{
-	private SetorDAO dao;
+
+	private DAOSetor<Setor> dao;
 	private Setor objeto;
 	
+	
 	public ControleSetor(){
-		dao = new SetorDAO();
+		dao = new DAOSetor<Setor>();
+		//objeto = new Setor();
 	}
 	
 	public String listar(){
@@ -35,9 +40,15 @@ public class ControleSetor implements Serializable{
 	}
 	
 	public String gravar(){
-		if (dao.gravar(objeto)){
+		boolean gravou = false;
+		if(objeto.getId() == null){
+			gravou = dao.persist(objeto);
+		} else {
+			gravou = dao.merge(objeto);
+		}
+		if(gravou){
 			return "listar";
-		}else{
+		} else {
 			return "form";
 		}
 	}
@@ -45,17 +56,18 @@ public class ControleSetor implements Serializable{
 	public String alterar(Setor obj){
 		objeto = obj;
 		return "form";
+		
 	}
 	
 	public String excluir(Setor obj){
-		dao.excluir(obj);
-		return "listar";
+		dao.remove(obj);
+		return "form";
 	}
 	
-	public SetorDAO getDao() {
+	public DAOSetor<Setor> getDao() {
 		return dao;
 	}
-	public void setDao(SetorDAO dao) {
+	public void setDao(DAOSetor<Setor> dao) {
 		this.dao = dao;
 	}
 	public Setor getObjeto() {
@@ -67,5 +79,4 @@ public class ControleSetor implements Serializable{
 	
 	
 	
-
 }
