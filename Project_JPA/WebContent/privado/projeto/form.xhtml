@@ -80,14 +80,14 @@
 					converter="#{controleProjeto.converterSetor}">
 					<f:selectItem itemLabel="Selecione um setor"
 						noSelectionOption="true" />
-					<f:selectItems value="#{controleProjeto.daoSetor.listarTodos()}" />
+					<f:selectItems value="#{controleProjeto.dao.listarTodosSetor()}" />
 				</h:selectOneMenu>
 			</h:panelGrid>
 			<h:dataTable value="#{controleProjeto.objeto.funcionarios}" var="obj"
 				frame="box" cellpadding="3" id="listaFuncionarios">
 				<f:facet name="header">
 				Lista de funcionários
-				<h:commandButton value="Adicionario funcionario"
+				<h:commandButton value="Adicionar funcionário"
 						action="#{controleProjeto.adicionarFuncionario()}">
 						<f:ajax execute="@this" render="@form" />
 					</h:commandButton>
@@ -149,7 +149,7 @@
 					requiredMessage="Informe o funcionario">
 					<f:selectItem itemLabel="Selecione um funcionario" 
 					noSelectionOption="true"/>
-					<f:selectItems value="#{controleProjeto.daoFuncionario.listarTodos()}"/>
+					<f:selectItems value="#{controleProjeto.dao.listarTodosFuncionarios()}"/>
 				</h:selectOneMenu>
 				<p:outputLabel value="Carga Horária"/>
 				<h:inputText value="#{controleProjeto.cargaHoraria}" size="3" 

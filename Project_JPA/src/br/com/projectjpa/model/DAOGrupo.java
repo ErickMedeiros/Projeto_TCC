@@ -17,7 +17,7 @@ public class DAOGrupo<T> extends GenericDAO<T>  implements Serializable{
 		super.getListaOrdem().add(new Ordem("Nome", "nome"));
 		super.setOrdemAtual((Ordem) super.getListaOrdem().get(1));
 		super.setFiltro("");
-		super.setMaximoObjetos(2);
+		super.setMaximoObjetos(1);
 		super.setConverterOrdem(new ConverterOrdem(super.getListaOrdem()));
 	}
 		

@@ -11,6 +11,7 @@ import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 import br.com.projectjpa.beans.Funcionario;
 import br.com.projectjpa.beans.Funcao;
 import br.com.projectjpa.beans.Grupo;
+import br.com.projectjpa.beans.Projeto;
 import br.com.projectjpa.beans.Setor;
 import br.com.projectjpa.conversores.ConverterOrdem;
 import br.com.projectjpa.util.UtilErros;
@@ -29,6 +30,10 @@ public class GenericDAO<T> implements Serializable {
 	private int totalObjetos = 0;
 	private ConverterOrdem converterOrdem;
 	
+	public List<Projeto> listarTodosProjetos(){
+		return em.createQuery("from Projeto order by nome").getResultList();
+	}
+	
 	public List<Funcionario> listarTodosFuncionarios(){
 		return em.createQuery("from Funcionario order by nome").getResultList();
 	}
@@ -42,7 +47,7 @@ public class GenericDAO<T> implements Serializable {
 	}
 	
 	public List<Setor> listarTodosSetor(){
-		return em.createQuery("from Setor order by nome").getResultList();
+		return em.createQuery("from Setor order by id").getResultList();
 	}
 	
 	public void iniciarTransacao(){

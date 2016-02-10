@@ -11,7 +11,7 @@
 		<h:messages />
 		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
 		<h:commandLink action="#{controleFuncionario.novo()}" value="Novo Funcionário" />
-		<h:panelGrid columns="6">
+		<h:panelGrid columns="7">
 			<h:selectOneMenu value="#{controleFuncionario.dao.ordemAtual}"
 				converter="#{controleFuncionario.dao.converterOrdem}">
 					<f:selectItems value="#{controleFuncionario.dao.listaOrdem}"/>
@@ -26,7 +26,7 @@
 				<f:ajax execute="@form" render="@form" event="keyup"/>
 			</h:inputText>			
 		</h:panelGrid>
-		<h:dataTable value="#{controleFuncionario.dao.listar()}" var="obj"
+		<h:dataTable value="#{controleFuncionario.dao.listarTodosFuncionarios()}" var="obj"
 			frame="box" rules="all" cellpadding="3">
 			<f:facet name="heaxer">Lista de Funcionários</f:facet>
 			<f:facet name="footer">
@@ -50,7 +50,10 @@
 					</h:commandButton>									
 				</div>
 			</f:facet>
-			
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{obj.id}
+			</h:column>
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
 				#{obj.nome}
@@ -66,13 +69,6 @@
 			<h:column>
 				<f:facet name="header">Setor</f:facet>
 				#{obj.setor.nome}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Foto</f:facet>
-				<p:graphicImage value="#{controleFuncionario.imagemDinamica}"
-					style="width:60px;height:60px" cache="false">
-					<f:param name="id_imagem" value="#{obj.id}" />
-				</p:graphicImage>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Alterar</f:facet>

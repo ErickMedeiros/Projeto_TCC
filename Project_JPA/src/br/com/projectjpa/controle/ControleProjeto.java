@@ -13,7 +13,7 @@ import br.com.projectjpa.conversores.ConverterFuncionario;
 import br.com.projectjpa.conversores.ConverterSetor;
 import br.com.projectjpa.model.DAOFuncionario;
 import br.com.projectjpa.model.DAOSetor;
-import br.com.projectjpa.model.ProjetoDAO;
+import br.com.projectjpa.model.DAOProjeto;
 
 
 
@@ -21,10 +21,13 @@ import br.com.projectjpa.model.ProjetoDAO;
 @ManagedBean(name="controleProjeto")
 @SessionScoped
 public class ControleProjeto implements Serializable{
-	private ProjetoDAO dao;
+	@SuppressWarnings("rawtypes")
+	private DAOProjeto dao;
 	private Projeto objeto;
+	@SuppressWarnings("rawtypes")
 	private DAOFuncionario daoFuncionario;
 	private ConverterFuncionario converterFuncionario;
+	@SuppressWarnings("rawtypes")
 	private DAOSetor daoSetor;
 	private ConverterSetor converterSetor;
 	private Funcionario funcionario;
@@ -34,11 +37,12 @@ public class ControleProjeto implements Serializable{
 	private Calendar fimParticipacao;
 	private Boolean addFunc = false;
 	
+	@SuppressWarnings("rawtypes")
 	public ControleProjeto(){
-		dao = new ProjetoDAO();
+		dao = new DAOProjeto<Projeto>();
 		daoFuncionario = new DAOFuncionario();
-		converterFuncionario = new ConverterFuncionario();
 		daoSetor = new DAOSetor();
+		converterFuncionario = new ConverterFuncionario();
 		converterSetor = new ConverterSetor();
 	}
 	
@@ -46,36 +50,45 @@ public class ControleProjeto implements Serializable{
 		return "/privado/projeto/listar?faces-redirect=true";
 	}
 	
-	public String novo(){
+	public String novo() {
 		objeto = new Projeto();
 		addFunc = false;
 		return "form";		
 	}
 	
-	public String cancelar(){
+	public String cancelar() {
 		addFunc = false;
 		dao.roolback();
 		return "listar";
 	}
 	
-	public String gravar(){
-		if (dao.gravar(objeto)){
+	@SuppressWarnings("unchecked")
+	public String gravar() {
+		boolean gravou = false;
+		if (objeto.getId() == null) {
 			addFunc = false;
-			return "listar";			
-		}else{
+			gravou = dao.persist(objeto);
+		} else {
+			gravou = dao.merge(objeto);
+		}
+		if (gravou) {
+			return "listar";
+		} else {
 			return "form";
 		}
 	}
 	
-	public String alterar(Projeto obj){
+	public String alterar(Projeto obj) {
 		objeto = obj;
 		addFunc = false;
 		return "form";
+
 	}
 	
-	public String excluir(Projeto obj){
-		dao.excluir(obj);
-		return "listar";
+	@SuppressWarnings("unchecked")
+	public String excluir(Projeto obj) {
+		dao.remove(obj);
+		return "form";
 	}
 	
 	public void removerFuncionario(ProjetoFuncionario obj){
@@ -106,11 +119,15 @@ public class ControleProjeto implements Serializable{
 		gestor = null;
 	}
 
-	public ProjetoDAO getDao() {
+	
+
+	@SuppressWarnings("rawtypes")
+	public DAOProjeto getDao() {
 		return dao;
 	}
 
-	public void setDao(ProjetoDAO dao) {
+	@SuppressWarnings("rawtypes")
+	public void setDao(DAOProjeto dao) {
 		this.dao = dao;
 	}
 
@@ -134,18 +151,22 @@ public class ControleProjeto implements Serializable{
 
 	
 
+	@SuppressWarnings("rawtypes")
 	public DAOFuncionario getDaoFuncionario() {
 		return daoFuncionario;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setDaoFuncionario(DAOFuncionario daoFuncionario) {
 		this.daoFuncionario = daoFuncionario;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public DAOSetor getDaoSetor() {
 		return daoSetor;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setDaoSetor(DAOSetor daoSetor) {
 		this.daoSetor = daoSetor;
 	}

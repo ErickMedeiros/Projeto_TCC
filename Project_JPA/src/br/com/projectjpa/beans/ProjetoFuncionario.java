@@ -31,7 +31,7 @@ public class ProjetoFuncionario implements Serializable {
 	@Column(name = "CARGA_HORARIA", nullable = false)
 	private Integer cargaHoraria;
 	
-	@NotNull(message = "Se funcionario é gestor deve ser informado")
+	@NotNull(message = "Se o funcionario é gestor deve ser informado")
 	@Column(name = "GESTOR", nullable = false)
 	private Boolean gestor;
 	

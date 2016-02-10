@@ -9,7 +9,7 @@
 	<h:form>
 		<h:commandLink action="/index?faces-redirect=true" value="Inicio" />
 		<h:messages />
-		<h:dataTable value="#{controleProjeto.dao.listarTodos()}" var="obj"
+		<h:dataTable value="#{controleProjeto.dao.listarTodosProjetos()}" var="obj"
 			frame="box" rules="all" cellpadding="3">
 			<f:facet name="header">
 				<h:commandButton action="#{controleProjeto.novo()}" 
