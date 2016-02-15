@@ -9,8 +9,13 @@
 <h:body> 
 	<h:form>
 		<h:messages />
-		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
-		<h:commandLink action="#{controleFuncao.novo()}" value="Nova Funcão" />
+		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
+		<h:dataTable value="#{controleFuncao.dao.listarTodosFuncao()}" var="obj"
+			frame="box" rules="all" cellpadding="3">
+			<f:facet name="header">
+				<h:commandButton action="#{controleFuncao.novo()}" 
+					value="Nova Função" />			
+			</f:facet>
 		<h:panelGrid columns="5">
 			<h:selectOneMenu value="#{controleFuncao.dao.ordemAtual}"
 				converter="#{controleFuncao.dao.converterOrdem}">
@@ -26,8 +31,6 @@
 				<f:ajax execute="@form" render="@form" event="keyup"/>
 			</h:inputText>			
 		</h:panelGrid>
-		<h:dataTable value="#{controleFuncao.dao.listar()}" var="obj"
-			frame="box" rules="all" cellpadding="3">
 			<f:facet name="heaxer">Lista de Funções</f:facet>
 			<f:facet name="footer">
 				<div align="center">

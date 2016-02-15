@@ -30,6 +30,8 @@ public class GenericDAO<T> implements Serializable {
 	private int totalObjetos = 0;
 	private ConverterOrdem converterOrdem;
 	
+	
+	
 	public List<Projeto> listarTodosProjetos(){
 		return em.createQuery("from Projeto order by nome").getResultList();
 	}
@@ -191,6 +193,11 @@ public class GenericDAO<T> implements Serializable {
 		return "Listando de " + (posicao + 1)+
 				" até "+ ate + " de " +totalObjetos+ " registros";
 	}	
+	
+	public Funcionario localizar (Integer id){
+		return em.find(Funcionario.class, id);
+	}
+	
 
 	public Class getClasse() {
 		return classe;

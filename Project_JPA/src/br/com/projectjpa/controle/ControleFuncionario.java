@@ -103,9 +103,10 @@ public class ControleFuncionario implements Serializable {
 		}
 	}
 
-	public StreamedContent getImagemDinamica() {
-		String strid = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id_imagem");
-		if (strid != null) {
+	public StreamedContent getImagemDinamica(){
+		String strid = FacesContext.getCurrentInstance().getExternalContext()
+				.getRequestParameterMap().get("id_imagem");
+		if (strid != null){
 			Integer id = Integer.parseInt(strid);
 			Funcionario obj = dao.localizar(id);
 			return obj.getImagem();

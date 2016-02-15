@@ -9,8 +9,13 @@
 <h:body> 
 	<h:form>
 		<h:messages />
-		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
-		<h:commandLink action="#{controleGrupo.novo()}" value="Novo Grupo" />
+		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
+		<h:dataTable value="#{controleGrupo.dao.listarTodosGrupo()}" var="obj"
+			frame="box" rules="all" cellpadding="3">
+			<f:facet name="header">
+				<h:commandButton action="#{controleGrupo.novo()}" 
+					value="Novo Grupo" />			
+			</f:facet>
 		<h:panelGrid columns="5">
 			<h:selectOneMenu value="#{controleGrupo.dao.ordemAtual}"
 				converter="#{controleGrupo.dao.converterOrdem}">
@@ -26,8 +31,7 @@
 				<f:ajax execute="@form" render="@form" event="keyup"/>
 			</h:inputText>			
 		</h:panelGrid>
-		<h:dataTable value="#{controleGrupo.dao.listar()}" var="obj"
-			frame="box" rules="all" cellpadding="3">
+		
 			<f:facet name="heaxer">Listagem de Grupos</f:facet>
 			<f:facet name="footer">
 				<div align="center">

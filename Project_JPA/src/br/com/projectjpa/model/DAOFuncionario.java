@@ -1,6 +1,7 @@
 package br.com.projectjpa.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -26,6 +27,8 @@ public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{
 		super.setMaximoObjetos(1);
 		super.setConverterOrdem(new ConverterOrdem(super.getListaOrdem()));
 	}
+	
+	
 	
 	public boolean gravar (Funcionario obj){
 		try{

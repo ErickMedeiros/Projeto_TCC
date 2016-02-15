@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
-
+import br.com.projectjpa.beans.Funcionario;
 import br.com.projectjpa.beans.Projeto;
 import br.com.projectjpa.conversores.ConverterOrdem;
 import br.com.projectjpa.jpa.EntityManagerUtil;
@@ -68,9 +68,7 @@ public class DAOProjeto<T> extends GenericDAO<T>  implements Serializable{
 		}
 	}	
 	
-	public Projeto localizar(Integer id){
-		return em.find(Projeto.class, id);
-	}
+	
 	
 	public void roolback(){
 		if (em.getTransaction().isActive() == false){

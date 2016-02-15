@@ -7,10 +7,16 @@
 
 <h:head><title>Lista de Funcionários</title></h:head> 
 <h:body> 
-	<h:form>
-		<h:messages />
-		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
-		<h:commandLink action="#{controleFuncionario.novo()}" value="Novo Funcionário" />
+	<h:form >
+	<p:panel header="Funcionário">
+	<h:messages />
+		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
+		<h:panelGrid>
+		<f:facet name="header">
+				<h:commandButton action="#{controleFuncionario.novo()}" 
+					value="Novo Funcionário" />			
+			</f:facet>
+			</h:panelGrid>
 		<h:panelGrid columns="7">
 			<h:selectOneMenu value="#{controleFuncionario.dao.ordemAtual}"
 				converter="#{controleFuncionario.dao.converterOrdem}">
@@ -58,6 +64,7 @@
 				<f:facet name="header">Nome</f:facet>
 				#{obj.nome}
 			</h:column>
+					
 			<h:column>
 				<f:facet name="header">Função</f:facet>
 				#{obj.funcao.nome}
@@ -70,6 +77,7 @@
 				<f:facet name="header">Setor</f:facet>
 				#{obj.setor.nome}
 			</h:column>
+			
 			<h:column>
 				<f:facet name="header">Alterar</f:facet>
 				<h:commandLink value="Alterar"
@@ -82,6 +90,8 @@
 					onclick="if (!confirm('Confirma a exclusão do funcionario? ')) return false" />
 			</h:column>
 		</h:dataTable>
+	</p:panel>
+		
 	</h:form>
 </h:body>
 </html>

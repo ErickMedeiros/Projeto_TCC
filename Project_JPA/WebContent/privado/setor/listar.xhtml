@@ -7,10 +7,16 @@
 
 <h:head><title>Listagem de setores</title></h:head> 
 <h:body> 
-	<h:form>
+	<h:form id="form">
+		<p:panel header="Setor">
 		<h:messages />
-		<h:commandLink action="/index?faces-redirect=true" value="Inicio" /><br/>
-		<h:commandLink action="#{controleSetor.novo()}" value="Novo registro" />
+		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
+		<h:panelGrid>
+		<f:facet name="header">
+				<h:commandButton action="#{controleSetor.novo()}" 
+					value="Novo Setor" />			
+			</f:facet>
+			</h:panelGrid>				
 		<h:panelGrid columns="5">
 			<h:selectOneMenu value="#{controleSetor.dao.ordemAtual}"
 				converter="#{controleSetor.dao.converterOrdem}">
@@ -26,8 +32,8 @@
 				<f:ajax execute="@form" render="@form" event="keyup"/>
 			</h:inputText>			
 		</h:panelGrid>
-		<h:dataTable value="#{controleSetor.dao.listar()}" var="obj"
-			frame="box" rules="all" cellpadding="3">
+		<h:dataTable value="#{controleSetor.dao.listarTodosSetor()}" var="obj"
+			frame="box" rules="all" cellpadding="3">	
 			<f:facet name="heaxer">Listagem de Setores</f:facet>
 			<f:facet name="footer">
 				<div align="center">
@@ -68,7 +74,7 @@
 					onclick="if (!confirm('Confirme a exclusão do setor?')) return false" />
 			</h:column>								
 		</h:dataTable>
-	
+	</p:panel>
 	</h:form>
 </h:body> 
 </html>

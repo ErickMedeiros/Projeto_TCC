@@ -85,7 +85,6 @@ public class Funcionario implements Serializable {
 	@JoinColumn(name = "FUNCAO", referencedColumnName = "ID", nullable = false)
 	private Funcao funcao;
 	
-	
 	@Transient
 	private StreamedContent imagem;
 
