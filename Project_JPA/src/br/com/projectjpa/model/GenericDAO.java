@@ -49,7 +49,7 @@ public class GenericDAO<T> implements Serializable {
 	}
 	
 	public List<Setor> listarTodosSetor(){
-		return em.createQuery("from Setor order by id").getResultList();
+		return em.createQuery("from Setor order by nome").getResultList();
 	}
 	
 	public void iniciarTransacao(){

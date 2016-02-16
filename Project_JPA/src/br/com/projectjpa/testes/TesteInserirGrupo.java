@@ -16,6 +16,8 @@ public class TesteInserirGrupo {
 			em.getTransaction().begin();
 			em.persist(g);
 			em.getTransaction().commit();
+			System.out.println("Inclusão ocorreu com sucesso");
+			
 		}
 
 	}
