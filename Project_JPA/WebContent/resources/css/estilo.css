@@ -92,7 +92,7 @@
 #barraEsquerda{
 	border: thin solid lightGray;
 	padding: 5px;
-	width: 150px;
+	width: 300px;
 	background: #eeeeee;
 }
 
@@ -102,7 +102,7 @@
 	background: fefeef;
 	position: absolute;
 	right: 8px;
-	left: 180px;
+	left: 330px;
 	height: 400px;
 	top: 90px;
 }

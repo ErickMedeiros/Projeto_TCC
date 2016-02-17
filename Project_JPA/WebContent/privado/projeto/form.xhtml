@@ -43,8 +43,10 @@
 	<h:outputScript library="js" name="scripts.js" />
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="form">
+		<p:panel header="Projeto">
 		<h:messages />
+		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
 		<h:panelGroup rendered="#{controleProjeto.addFunc == false}">
 			<h:panelGrid columns="2">
 				<f:facet name="header">Edição de projetos</f:facet>
@@ -172,6 +174,7 @@
 				</h:inputText>							
 			</h:panelGrid>		
 		</h:panelGroup>
+	</p:panel>
 	</h:form>
 </h:body>
 </html>

@@ -4,18 +4,37 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"> 
-
-<h:head><title>Lista de Funções</title></h:head> 
+      
+<h:head><title>Lista de Grupos</title></h:head> 
 <h:body> 
-	<h:form>
+
+		<h:form id="form">
+		<p:panel header="Função">
 		<h:messages />
 		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
-		<h:dataTable value="#{controleFuncao.dao.listarTodosFuncao()}" var="obj"
-			frame="box" rules="all" cellpadding="3">
-			<f:facet name="header">
+		<h:panelGrid>
+		<f:facet name="header">
 				<h:commandButton action="#{controleFuncao.novo()}" 
 					value="Nova Função" />			
 			</f:facet>
+			</h:panelGrid>				
+		<h:panelGrid columns="5">
+			<h:selectOneMenu value="#{controleFuncao.dao.ordemAtual}"
+				converter="#{controleFuncao.dao.converterOrdem}">
+					<f:selectItems value="#{controleFuncao.dao.listaOrdem}"/>
+					<f:ajax execute="@form" render="@form"/>
+			</h:selectOneMenu>
+			<h:outputLabel value="Filtro" />
+			<h:inputText value="#{controleFuncao.dao.filtro}" >
+				<f:ajax execute="@form" render="@form" event="keyup"/>
+			</h:inputText>
+			<h:outputLabel value="Maximo objetos" />
+			<h:inputText value="#{controleFuncao.dao.maximoObjetos}" >
+				<f:ajax execute="@form" render="@form" event="keyup"/>
+			</h:inputText>			
+		</h:panelGrid>
+		<h:dataTable value="#{controleFuncao.dao.listarTodosFuncao()}" var="obj"
+			frame="box" rules="all" cellpadding="3">
 		<h:panelGrid columns="5">
 			<h:selectOneMenu value="#{controleFuncao.dao.ordemAtual}"
 				converter="#{controleFuncao.dao.converterOrdem}">
@@ -71,7 +90,7 @@
 					onclick="if (!confirm('Confirme a exclusão da Função?')) return false" />
 			</h:column>								
 		</h:dataTable>
-	
+	</p:panel>
 	</h:form>
 </h:body> 
 </html>
