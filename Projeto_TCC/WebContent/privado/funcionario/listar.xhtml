@@ -1,97 +1,106 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/layout.xhtml">
 
-<h:head><title>Lista de Funcionários</title></h:head> 
-<h:body> 
-	<h:form >
-	<p:panel header="Funcionário">
-	<h:messages />
-		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
-		<h:panelGrid>
-		<f:facet name="header">
-				<h:commandButton action="#{controleFuncionario.novo()}" 
-					value="Novo Funcionário" />			
-			</f:facet>
-			</h:panelGrid>
-		<h:panelGrid columns="7">
-			<h:selectOneMenu value="#{controleFuncionario.dao.ordemAtual}"
-				converter="#{controleFuncionario.dao.converterOrdem}">
-					<f:selectItems value="#{controleFuncionario.dao.listaOrdem}"/>
-					<f:ajax execute="@form" render="@form"/>
-			</h:selectOneMenu>
-			<h:outputLabel value="Filtro" />
-			<h:inputText value="#{controleFuncionario.dao.filtro}" >
-				<f:ajax execute="@form" render="@form" event="keyup"/>
-			</h:inputText>
-			<h:outputLabel value="Maximo objetos" />
-			<h:inputText value="#{controleFuncionario.dao.maximoObjetos}" >
-				<f:ajax execute="@form" render="@form" event="keyup"/>
-			</h:inputText>			
-		</h:panelGrid>
-		<h:dataTable value="#{controleFuncionario.dao.listarTodosFuncionarios()}" var="obj"
-			frame="box" rules="all" cellpadding="3">
-			<f:facet name="heaxer">Lista de Funcionários</f:facet>
-			<f:facet name="footer">
-				<div align="center">
-					<h:outputLabel value="#{controleFuncionario.dao.mensagemNavegacao}" /><br/>
-					<h:commandButton action="#{controleFuncionario.dao.primeiro()}" 
-					value="Primeiro" >
-						<f:ajax execute="@form" render="@form"/>
-					</h:commandButton>
-					<h:commandButton action="#{controleFuncionario.dao.anterior()}" 
-					value="Anterior" >
-						<f:ajax execute="@form" render="@form"/>
-					</h:commandButton>					
-					<h:commandButton action="#{controleFuncionario.dao.proximo()}" 
-					value="Proximo" >
-						<f:ajax execute="@form" render="@form"/>
-					</h:commandButton>	
-					<h:commandButton action="#{controleFuncionario.dao.ultimo()}" 
-					value="Ultimo" >
-						<f:ajax execute="@form" render="@form"/>
-					</h:commandButton>									
-				</div>
-			</f:facet>
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				#{obj.id}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				#{obj.nome}
-			</h:column>
-					
-			<h:column>
-				<f:facet name="header">Função</f:facet>
-				#{obj.funcao.nome}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Grupo</f:facet>
-				#{obj.grupo.nome}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Setor</f:facet>
-				#{obj.setor.nome}
-			</h:column>
+	<ui:define name="content">
+		<h1 class="aw-page-title">Funcionários Cadastrados</h1>
+
+		<h:form id="frm">
+
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Novo Funcionário"
+						action="#{controleFuncionario.novo()}" process="@this capaPanel"
+						update="@form" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:messages autoUpdate="false" />
+
+			<div class="ui-fluid">
+				<p:panelGrid id="capaPanel" columns="5" layout="grid"
+					style="margin-top: 20px; margin-bottom: 40px"
+					styleClass="panelgrid-noborder">
+					<p:selectOneMenu value="#{controleFuncionario.dao.ordemAtual}"
+						converter="#{controleFuncionario.dao.converterOrdem}">
+						<f:selectItems value="#{controleFuncinario.dao.listaOrdem}" />
+						<f:ajax execute="@form" render="@form" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Filtro" for="filtro" />
+					<p:inputText id="filtro" value="#{controleFuncionario.dao.filtro}">
+						<f:ajax execute="@form" render="@form" event="keyup" />
+					</p:inputText>
+					<p:outputLabel value="Maximo objetos" for="maxobj" />
+					<p:inputText id="maxobj" value="#{controleFuncionario.dao.maximoObjetos}">
+						<f:ajax execute="@form" render="@form" event="keyup" />
+					</p:inputText>
+				</p:panelGrid>
+			</div>
+			<p:dataTable
+				value="#{controleFuncionario.dao.listarTodosFuncionarios()}"
+				var="obj" frame="box" rules="all" cellpadding="3">
+				<f:facet name="heaxer">Listagem de Funcionario</f:facet>
+				<f:facet name="footer">
+					<div align="center">
+						<p:outputLabel
+							value="#{controleFuncionario.dao.mensagemNavegacao}" />
+						<br />
+						<p:commandButton action="#{controleFuncionario.dao.primeiro()}"
+							value="Primeiro">
+							<f:ajax execute="@form" render="@form" />
+						</p:commandButton>
+						<p:commandButton action="#{controleFuncionario.dao.anterior()}"
+							value="Anterior">
+							<f:ajax execute="@form" render="@form" />
+						</p:commandButton>
+						<p:commandButton action="#{controleFuncionario.dao.proximo()}"
+							value="Proximo">
+							<f:ajax execute="@form" render="@form" />
+						</p:commandButton>
+						<p:commandButton action="#{controleFuncionario.dao.ultimo()}"
+							value="Ultimo">
+							<f:ajax execute="@form" render="@form" />
+						</p:commandButton>
+					</div>
+				</f:facet>
 			
-			<h:column>
-				<f:facet name="header">Alterar</f:facet>
-				<h:commandLink value="Alterar"
-					action="#{controleFuncionario.alterar(obj)}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Excluir</f:facet>
-				<h:commandLink value="Excluir"
-					action="#{controleFuncionario.excluir(obj)}"
-					onclick="if (!confirm('Confirma a exclusão do funcionario? ')) return false" />
-			</h:column>
-		</h:dataTable>
-	</p:panel>
+			<p:column headerText="ID">	
+				#{obj.id}
+			</p:column>
+				<p:column headerText="Nome">			
+				#{obj.nome}
+			</p:column>
+				<p:column headerText="Função">
+				#{obj.funcao.nome}
+			</p:column>
+				<p:column headerText="Grupo">
+				#{obj.grupo.nome}
+			</p:column>
+				<p:column headerText="Setor">
+				#{obj.setor.nome}
+			</p:column>
 		
-	</h:form>
-</h:body>
-</html>
+				<p:column headerText="Foto">
+				<p:graphicImage value="#{controleFuncionario.imagemDinamica}"
+					style="width:60px;height:60px" cache="false">
+					<f:param name="id_imagem" value="#{obj.id}" />
+				</p:graphicImage>
+			</p:column>
+			
+				<p:column headerText="Alterar">
+					<p:commandButton action="#{controleFuncionario.alterar(obj)}"
+						value="Alterar" />
+				</p:column>
+				<p:column headerText="Excluir">
+					<p:commandButton action="#{controleFuncionario.excluir(obj)}"
+						value="Excluir"
+						onclick="if (!confirm('Confirme a exclusão do funcionário?')) return false" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

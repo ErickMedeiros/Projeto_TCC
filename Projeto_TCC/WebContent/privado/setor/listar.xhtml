@@ -23,7 +23,8 @@
 			<div class="ui-fluid">
 				<p:panelGrid id="capaPanel" columns="5" layout="grid" 
 					style="margin-top: 20px; margin-bottom: 40px"
-					styleClass="panelgrid-noborder">
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2">
 					<p:selectOneMenu value="#{controleSetor.dao.ordemAtual}"
 						converter="#{controleSetor.dao.converterOrdem}">
 						<f:selectItems value="#{controleSetor.dao.listaOrdem}" />
