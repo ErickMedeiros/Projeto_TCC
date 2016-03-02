@@ -7,7 +7,7 @@
 	<ui:define name="content">
 		<h1 class="aw-page-title">Cadastro de Funcionário</h1>
 
-		<h:form id="form">
+		<h:form id="formcad">
 
 			<p:toolbar>
 				<p:toolbarGroup>
@@ -18,11 +18,12 @@
 
 			<p:messages autoUpdate="false" />
 
-			<div class="ui-fluid">
+			<div class="ui-grid ui-grid-responsive">
 
 				<p:panelGrid columns="4" layout="grid" style="margin-top: 20px"
 					styleClass="panelgrid-noborder"
-					columnClasses="ui-grid-col-1, ui-grid-col-5, ui-grid-col-1, ui-grid-col-5">
+					columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+					
 					<p:outputLabel value="ID" />
 					<p:inputText value="#{controleFuncionario.objeto.id}"
 						readonly="true" />
