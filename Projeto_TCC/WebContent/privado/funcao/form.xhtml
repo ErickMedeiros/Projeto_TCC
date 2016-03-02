@@ -1,32 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
-      
-      
-<h:head><title>Edição de Funções</title></h:head> 
-<h:body> 
-	<h:form>
-		<h:messages />
-		<h:commandLink action="/index?faces-redirect=true" value="HOME" /><br/>
-		<h:panelGrid columns="2">
-			<f:facet name="header">Edição de Funções</f:facet>
-			<f:facet name="footer">
-				<div align="center">
-					<h:commandButton value="Cancelar" 
-						action="#{controleFuncao.cancelar()}" />
-					<h:commandButton value="Gravar"
-						action="#{controleFuncao.gravar()}"/>	
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Cadastro de Função</h1>
+
+		<h:form id="form">
+
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar"
+						action="#{controleFuncao.gravar()}" update="@form" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:messages autoUpdate="false" />
+
+			<div class="ui-grid ui-grid-responsive">
+
+				<p:panelGrid columns="2" layout="ui-grid-row" style="margin-top: 20px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+					<p:outputLabel value="ID" />
+					<p:inputText value="#{controleFuncao.objeto.id}"
+						readonly="true" />
+					<p:outputLabel value="Nome" />
+					<p:inputText value="#{controleFuncao.objeto.nome}"
+						maxlength="40" size="40" />
+		</p:panelGrid>
 				</div>
-			</f:facet>
-			<h:outputLabel value="ID" />
-			<h:inputText value="#{controleFuncao.objeto.id}"  readonly="true"/>
-			<h:outputLabel value="Nome" />
-			<h:inputText value="#{controleFuncao.objeto.nome}" maxlength="40"
-				size="40" />
-		</h:panelGrid>
-	</h:form>
-</h:body> 
-</html>
+		</h:form>
+	</ui:define>
+</ui:composition>
