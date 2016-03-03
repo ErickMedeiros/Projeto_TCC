@@ -60,9 +60,6 @@ public class Funcionario implements Serializable {
 	@NotNull(message = "O campo ativo deve ser informado")
 	@Column(name = "ATIVO", nullable = false)
 	private Boolean ativo;
-	@Column(name = "FOTO")
-	@Lob
-	private byte[] foto;
 	@NotEmpty(message = "Nome de usuario deve ser informado")
 	@Length(max = 20, message = "O nome de usuario não pode ultrapassar {max} caracteres")
 	@Column(name = "NOME_USUARIO", length = 20, nullable = false, unique = true)
@@ -148,14 +145,7 @@ public class Funcionario implements Serializable {
 		this.ativo = ativo;
 	}
 
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
+	
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
@@ -227,15 +217,5 @@ public class Funcionario implements Serializable {
 		return nome;
 	}
 
-	public StreamedContent getImagem() {
-		if (this.getFoto() != null) {
-			return new DefaultStreamedContent(new ByteArrayInputStream(
-					this.getFoto()), "");
-		} else
-			return new DefaultStreamedContent();
-	}
-
-	public void setImagem(StreamedContent imagem) {
-		this.imagem = imagem;
-	}
+	
 }

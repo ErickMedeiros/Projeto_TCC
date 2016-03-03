@@ -91,26 +91,7 @@ public class ControleFuncionario implements Serializable {
 		return "form";
 	}
 
-	public void enviarFoto(FileUploadEvent event) {
-		try {
-			byte[] foto = IOUtils.toByteArray(event.getFile().getInputstream());
-			objeto.setFoto(foto);
-			UtilMensagens.mensagemInformacao("Arquivo enviado com sucesso! " + event.getFile().getFileName());
-		} catch (Exception e) {
-			UtilMensagens.mensagemErro("Erro ao enviar arquivo:" + UtilErros.getMensagemErro(e));
-		}
-	}
-
-	public StreamedContent getImagemDinamica(){
-		String strid = FacesContext.getCurrentInstance().getExternalContext()
-				.getRequestParameterMap().get("id_imagem");
-		if (strid != null){
-			Integer id = Integer.parseInt(strid);
-			Funcionario obj = dao.localizar(id);
-			return obj.getImagem();
-		}
-		return new DefaultStreamedContent();
-	}
+	
 
 	@SuppressWarnings("rawtypes")
 	public DAOFuncionario getDao() {
