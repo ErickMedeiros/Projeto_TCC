@@ -83,13 +83,6 @@
 				#{obj.setor.nome}
 			</p:column>
 		
-				<p:column headerText="Foto">
-				<p:graphicImage value="#{controleFuncionario.imagemDinamica}"
-					style="width:60px;height:60px" cache="false">
-					<f:param name="id_imagem" value="#{obj.id}" />
-				</p:graphicImage>
-			</p:column>
-			
 				<p:column headerText="Alterar">
 					<p:commandButton action="#{controleFuncionario.alterar(obj)}"
 						value="Alterar" />

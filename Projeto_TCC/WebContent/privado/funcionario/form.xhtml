@@ -8,82 +8,81 @@
 		<h1 class="aw-page-title">Cadastro de Funcionário</h1>
 
 		<h:form id="form">
-
+			
 			<p:toolbar>
 				<p:toolbarGroup>
-					<p:commandButton value="Salvar"
-						action="#{controleFuncionario.gravar()}" update="@form" />
+					<p:commandButton value="Salvar" action="#{controleFuncionario.gravar()}"
+						process="@this capaPanel" update="@form" />
 				</p:toolbarGroup>
 			</p:toolbar>
-
-			<p:messages autoUpdate="true" />
-
-			<div class="ui-grid ui-grid-responsive">
-
-				<p:panelGrid columns="4" layout="grid" style="margin-top: 20px; text-align: left">
-					<p:outputLabel value="ID" />
-					<p:inputText value="#{controleFuncionario.objeto.id}"
-						readonly="true" />
+			
+			<p:messages autoUpdate="false" />
+			
+			<div class="ui-fluid">
+				<p:panelGrid id="capaPanel" columns="4" layout="grid" 
+					style="margin-top: 20px; margin-bottom: 40px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+	
 					<p:outputLabel value="Nome" />
-					<p:inputText value="#{controleFuncionario.objeto.nome}"
-						maxlength="40" />
+					<p:inputText value="#{controleFuncionario.objeto.nome}" size="67"/>
+					
 					<p:outputLabel value="CPF" for="cpf" />
-					<p:inputMask id="cpf" mask="999.999.999-99" value="#{controleFuncionario.objeto.cpf}" />
-					<p:outputLabel value="Email" />
-					<p:inputText value="#{controleFuncionario.objeto.email}"
-						maxlength="40" />
+					<p:inputMask id="cpf" mask="999.999.999-99" value="#{controleFuncionario.objeto.cpf}" size="67" />
+					
+					<p:outputLabel value="Email" size="67" />
+					<p:inputText value="#{controleFuncionario.objeto.email}" size="67" />
+					
 					<p:outputLabel value="Salario" />
-					<p:inputText value="#{controleFuncionario.objeto.salario}"
-					 maxlength="20" onkeydown="Mascara(this,Valor);"
-						onkeyup="Mascara(this,Valor);" onkeypress="Mascara(this,Valor);" />
+					<p:inputText value="#{controleFuncionario.objeto.salario}" onkeydown="Mascara(this,Valor);"
+						onkeyup="Mascara(this,Valor);" onkeypress="Mascara(this,Valor);" size="67" />
+					
 					<p:outputLabel value="Nascimento" />
-					<p:calendar value="#{controleFuncionario.objeto.nascimento}" pattern="dd/MM/yyyy" locale="pt_BR">
+					<p:calendar value="#{controleFuncionario.objeto.nascimento}" pattern="dd/MM/yyyy" locale="pt_BR" size="67">
 					<f:converter converterId="converterCalendar" />
 			   		</p:calendar>
+					
 					<p:outputLabel value="Ativo" />
 					<p:selectBooleanCheckbox
 						value="#{controleFuncionario.objeto.ativo}" />
+					
 					<p:outputLabel value="Nome de usuario" />
-					<p:inputText value="#{controleFuncionario.objeto.nomeUsuario}"
-					 maxlength="20" />
+					<p:inputText value="#{controleFuncionario.objeto.nomeUsuario}" size="67" />
+					
 					<h:outputLabel for="pwd2" value="Senha" />
-					<p:password id="pwd2" value="#{controleFuncionario.objeto.senha}"
-						maxlength="10" redisplay="true" size="10" label="Senha"
+					<p:password id="pwd2" value="#{controleFuncionario.objeto.senha}" redisplay="true" size="67" label="Senha"
 						required="true" />
+					
 					<p:outputLabel value="Função" />
 					<p:selectOneMenu value="#{controleFuncionario.objeto.funcao}"
-						converter="#{controleFuncionario.converterFuncao}">
+						converter="#{controleFuncionario.converterFuncao}" size="67">
 						<f:selectItem itemLabel="Selecione uma função"
 							noSelectionOption="true" />
 						<f:selectItems
 							value="#{controleFuncionario.dao.listarTodosFuncao()}" />
 					</p:selectOneMenu>
+					
 					<p:outputLabel value="Grupo" />
 					<p:selectOneMenu value="#{controleFuncionario.objeto.grupo}"
-						converter="#{controleFuncionario.converterGrupo}">
+						converter="#{controleFuncionario.converterGrupo}" size="67">
 						<f:selectItem itemLabel="Selecione um grupo"
 							noSelectionOption="true" />
 						<f:selectItems
 							value="#{controleFuncionario.dao.listarTodosGrupo()}" />
 					</p:selectOneMenu>
+					
 					<p:outputLabel value="Setor" />
 					<p:selectOneMenu value="#{controleFuncionario.objeto.setor}"
-						converter="#{controleFuncionario.converterSetor}">
+						converter="#{controleFuncionario.converterSetor}" size="67">
 						<f:selectItem itemLabel="Selecione um setor"
-							noSelectionOption="true" />
+							noSelectionOption="true" size="67" />
 						<f:selectItems
 							value="#{controleFuncionario.dao.listarTodosSetor()}" />
-					</p:selectOneMenu>
-					<p:outputLabel value="Foto:" />
-					<p:fileUpload id="uploadImagem" mode="advanced"
-						update="imagem" auto="true" label="Selecionar"
-						fileUploadListener="#{controleFuncionario.enviarFoto}"
-						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-					<p:outputLabel value="" />
-					<p:graphicImage value="#{controleFuncionario.objeto.imagem}"
-						id="imagem" style="width:60px;height:60px" cache="false" />
+					</p:selectOneMenu>					
+					
 				</p:panelGrid>
-				</div>
+			</div>
+
 		</h:form>
 	</ui:define>
 </ui:composition>
