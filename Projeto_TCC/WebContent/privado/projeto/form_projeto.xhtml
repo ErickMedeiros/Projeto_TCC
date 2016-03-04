@@ -9,46 +9,7 @@
 	
 	<ui:define name="content">
 		<h1 class="aw-page-title">Novo Projeto</h1>
-	<h:head>
 	
-	<title>Edição de Projetos</title>
-	<script type="text/javascript">
-		PrimeFaces.locales['pt_BR'] = {
-			closeText : 'Fechar',
-			prevText : 'Anterior',
-			nextText : 'Próximo',
-			currentText : 'Começo',
-			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
-					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
-					'Novembro', 'Dezembro' ],
-			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
-					'Sexta', 'Sábado' ],
-			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
-			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-			weekHeader : 'Semana',
-			firstDay : 1,
-			isRTL : false,
-			showMonthAfterYear : false,
-			yearSuffix : '',
-			timeOnlyTitle : 'Só Horas',
-			timeText : 'Tempo',
-			hourText : 'Hora',
-			minuteText : 'Minuto',
-			secondText : 'Segundo',
-			currentText : 'Data Atual',
-			ampm : false,
-			month : 'Mês',
-			week : 'Semana',
-			day : 'Dia',
-			allDayText : 'Todo Dia'
-		};
-	</script>
-	<h:outputScript library="js" name="scripts.js" />
-</h:head>	
-	
-		
 		<h:form id="frm">
 			
 			<p:toolbar>
@@ -61,7 +22,7 @@
 			<p:messages autoUpdate="false" />
 			
 			<div class="ui-fluid">
-				<p:panelGrid id="capaPanel" columns="4" layout="grid" 
+				<p:panelGrid id="capaPanel" columns="2" layout="grid" 
 					style="margin-top: 20px; margin-bottom: 40px"
 					styleClass="panelgrid-noborder"
 					columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
@@ -92,72 +53,44 @@
 				</p:selectOneMenu>
 					
 				</p:panelGrid>
-			</div>
-			
-			<p:commandButton value="Novo Funcionário"
-				action="#{controleProjeto.adicionarFuncionario()}"
-				oncomplete="PF('itemDialog').show()"
-				process="@this" update="itemPanel">
-				<p:resetInput target="itemPanel" />
-			</p:commandButton>
-			
-			<p:dataTable id="itensTable" value="#{cadastroOrcamentoBean.orcamento.itens}" var="item"
+				</div>
+				
+				
+				<p:dataTable id="listaFuncionarios" value="#{controleProjeto.objeto.funcionarios}" var="obj"
 				emptyMessage="Nenhum item adicionado."
 				reflow="true"
 				style="margin-top: 10px">
-				
-				<p:column headerText="Descrição">
-					<h:outputText value="#{item.descricao}"/>
+
+
+				<p:column headerText="Funcionário">
+					<h:outputText value="#{obj.funcionario.nome}" />
 				</p:column>
-				
-				<p:column headerText="Tipo">
-					<h:outputText value="#{item.tipo.descricao}"/>
+				<p:column headerText="Carga Horária">
+					<h:outputText value="#{obj.cargaHoraria}" />
 				</p:column>
-				
-				<p:column headerText="Preço">
-					<h:outputText value="#{item.preco}">
-						<f:convertNumber type="currency" />
+				<p:column headerText="Gestor">
+					<h:outputText value="#{obj.gestor == true ? 'Sim' : 'Não'}" />
+				</p:column>
+				<p:column headerText="Início Participação">
+					<h:outputText value="#{obj.inicioParticipacao}">
+						<f:converter converterId="converterCalendar" />
 					</h:outputText>
 				</p:column>
-			
+				<p:column headerText="Fim Participação">
+					<h:outputText value="#{obj.fimParticipacao}">
+						<f:converter converterId="converterCalendar" />
+					</h:outputText>
+				</p:column>
+						
+				<p:column headerText="Excluir">
+					<p:commandButton action="#{controleProjeto.removerFuncionario(obj)}"
+						value="Excluir"
+						onclick="if (!confirm('Confirma a exclusão?')) return false">
+						<f:ajax execute="@this" render="@form" />
+					</p:commandButton>
+				</p:column>
 			</p:dataTable>
-			
-			<p:dialog widgetVar="itemDialog" header="Novo item"
-				resizable="false" style="min-width: 300px" responsive="true">
-				
-				<h:panelGroup id="itemPanel" layout="block" styleClass="ui-fluid">
-					<p:messages id="msgDialog" autoUpdate="false" />
-					
-					<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
-						columnClasses="ui-grid-col-4, ui-grid-col-8">
-					
-						<p:outputLabel value="Descrição" for="descricao" />
-						<p:inputText id="descricao" value="#{cadastroOrcamentoBean.item.descricao}" />
 						
-						<p:outputLabel value="Tipo" for="tipo" />
-						<p:selectOneMenu id="tipo" value="#{cadastroOrcamentoBean.item.tipo}">
-							<f:selectItem itemLabel="Selecione" />
-							<f:selectItem itemLabel="Produto" itemValue="PRODUTO" />
-							<f:selectItem itemLabel="Serviço" itemValue="SERVICO" />
-						</p:selectOneMenu>
-						
-						<p:outputLabel value="Preço" for="preco" />
-						<p:inputText id="preco" value="#{cadastroOrcamentoBean.item.preco}">
-							<f:convertNumber />
-						</p:inputText>
-						
-						<p:outputLabel/>
-						<p:commandButton value="Adicionar"
-							action="#{cadastroOrcamentoBean.adicionarItem}"
-							process="itemPanel" update="itemPanel itensTable"
-							oncomplete="if (!args.validationFailed) PF('itemDialog').hide()" />
-					
-					</p:panelGrid>
-					
-				</h:panelGroup>
-				
-			</p:dialog>
-			
 		</h:form>
 	</ui:define>
 	
