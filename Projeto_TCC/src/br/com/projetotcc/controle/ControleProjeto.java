@@ -53,7 +53,7 @@ public class ControleProjeto implements Serializable{
 	public String novo() {
 		objeto = new Projeto();
 		addFunc = false;
-		return "form2";		
+		return "form";		
 	}
 	
 	public String cancelar() {
