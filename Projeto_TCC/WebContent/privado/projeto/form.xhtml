@@ -94,9 +94,7 @@
 					</p:dataTable>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{controleProjeto.addFunc == true}">
-					
-					
-					
+			
 					<p:panelGrid columns="2">
 						
 							<div align="center">
@@ -110,7 +108,6 @@
 									<f:ajax execute="@form" render="@form" />
 								</p:commandButton>
 							</div>
-						</f:facet>
 						<p:outputLabel value="Funcionário" />
 						<p:selectOneMenu value="#{controleProjeto.funcionario}"
 							converter="#{controleProjeto.converterFuncionario}"
