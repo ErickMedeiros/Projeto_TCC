@@ -20,6 +20,7 @@ import br.com.projetotcc.util.UtilMensagens;
 @SuppressWarnings("serial")
 public class GenericDAO<T> implements Serializable {
 
+	@SuppressWarnings("rawtypes")
 	private Class classe;
 	private EntityManager em;
 	private String filtro = "";
@@ -32,24 +33,29 @@ public class GenericDAO<T> implements Serializable {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public List<Projeto> listarTodosProjetos(){
-		return em.createQuery("from Projeto order by nome").getResultList();
+		return em.createQuery("from Projeto order by id").getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Funcionario> listarTodosFuncionarios(){
-		return em.createQuery("from Funcionario order by nome").getResultList();
+		return em.createQuery("from Funcionario order by id").getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Funcao> listarTodosFuncao(){
-		return em.createQuery("from Funcao order by nome").getResultList();
+		return em.createQuery("from Funcao order by id").getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Grupo> listarTodosGrupo(){
-		return em.createQuery("from Grupo order by nome").getResultList();
+		return em.createQuery("from Grupo order by id").getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Setor> listarTodosSetor(){
-		return em.createQuery("from Setor order by nome").getResultList();
+		return em.createQuery("from Setor order by id").getResultList();
 	}
 	
 	public void iniciarTransacao(){

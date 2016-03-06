@@ -1,103 +1,59 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-	<ui:define name="content">
-		<h1 class="aw-page-title">Projetos Cadastrados</h1>
-
-		<h:form id="form">
-
-			<p:toolbar>
-				<p:toolbarGroup>
-					<p:commandButton value="Novo Projeto"
-						action="#{controleProjeto.novo()}" process="@this capaPanel"
-						update="@form" />
-				</p:toolbarGroup>
-			</p:toolbar>
-
-			<p:messages autoUpdate="false" />
-
-					<div class="ui-fluid">
-				<p:panelGrid id="capaPanel" columns="5" layout="grid" 
-					style="margin-top: 20px; margin-bottom: 40px"
-					styleClass="panelgrid-noborder"
-					columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2">
-					
-					<p:selectOneMenu value="#{controleProjeto.dao.ordemAtual}"
-						converter="#{controleProjeto.dao.converterOrdem}">
-						<f:selectItems value="#{controleProjeto.dao.listaOrdem}" />
-						<f:ajax execute="@form" render="@form" />
-					</p:selectOneMenu>
-					<p:outputLabel value="Filtro" />
-					<p:inputText value="#{controleProjeto.dao.filtro}">
-						<f:ajax execute="@form" render="@form" event="keyup" />
-					</p:inputText>
-					<p:outputLabel value="Maximo objetos" />
-					<p:inputText value="#{controleProjeto.dao.maximoObjetos}">
-						<f:ajax execute="@form" render="@form" event="keyup" />
-					</p:inputText>
-				</p:panelGrid>
-			</div>
-			<p:dataTable value="#{controleProjeto.dao.listarTodosProjetos()}"
-				var="obj" frame="box" rules="all" cellpadding="3">
-				<f:facet name="heaxer">Listagem de Projeto</f:facet>
-				<f:facet name="footer">
-					<div align="center">
-						<p:outputLabel value="#{controleProjeto.dao.mensagemNavegacao}" />
-						<br />
-						<p:commandButton action="#{controleProjeto.dao.primeiro()}"
-							value="Primeiro">
-							<f:ajax execute="@form" render="@form" />
-						</p:commandButton>
-						<p:commandButton action="#{controleProjeto.dao.anterior()}"
-							value="Anterior">
-							<f:ajax execute="@form" render="@form" />
-						</p:commandButton>
-						<p:commandButton action="#{controleProjeto.dao.proximo()}"
-							value="Proximo">
-							<f:ajax execute="@form" render="@form" />
-						</p:commandButton>
-						<p:commandButton action="#{controleProjeto.dao.ultimo()}"
-							value="Ultimo">
-							<f:ajax execute="@form" render="@form" />
-						</p:commandButton>
-					</div>
-				</f:facet>
-				<p:column headerText="Nome">
-					<h:outputText value="#{obj.nome}" />
-				</p:column>
-
-				<p:column headerText="Inicio">
-					<h:outputText value="#{obj.inicio}">
-					<f:converter converterId="converterCalendar" />
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Fim">
-					<h:outputText value="#{obj.fim}">
-					<f:converter converterId="converterCalendar" />
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Ativo">
-					<h:outputText value="#{obj.ativo == true ? 'Sim' : 'Não'}" />
-				</p:column>
-				<p:column headerText="Setor">
-					<h:outputText value="#{obj.setor.nome}" />
-				</p:column>
-				<p:column headerText="Alterar">
-					<p:commandButton action="#{controleProjeto.alterar(obj)}"
-						value="Alterar" />
-				</p:column>
-				<p:column headerText="Excluir">
-					<p:commandButton action="#{controleProjeto.excluir(obj)}"
-						value="Excluir"
-						onclick="if (!confirm('Confirma a exclusão do objeto'))) return false"/>
-				</p:column>
-			</p:dataTable>
-
-		</h:form>
-	</ui:define>
-
-</ui:composition>
-
+<h:head><title>Listagem de Projetos</title></h:head> 
+<h:body> 
+	<h:form>
+		<h:commandLink action="/index?faces-redirect=true" value="Inicio" />
+		<h:messages />
+		<h:dataTable value="#{controleProjeto.dao.listarTodos()}" var="obj"
+			frame="box" rules="all" cellpadding="3">
+			<f:facet name="header">
+				<h:commandButton action="#{controleProjeto.novo()}" 
+					value="Novo Registro" />			
+			</f:facet>
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{obj.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{obj.nome}
+			</h:column>		
+			<h:column>
+				<f:facet name="header">Inicio</f:facet>
+				<h:outputText value="#{obj.inicio}" >
+					<f:converter converterId="converterCalendar"/>
+				</h:outputText>
+			</h:column>	
+			<h:column>
+				<f:facet name="header">Fim</f:facet>
+				<h:outputText value="#{obj.fim}" >
+					<f:converter converterId="converterCalendar"/>
+				</h:outputText>
+			</h:column>	
+			<h:column>
+				<f:facet name="header">Setor</f:facet>
+				#{obj.setor.nome}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ativo</f:facet>
+				<h:outputText value="#{obj.ativo == true ? 'Sim' : 'Não'}" />
+			</h:column>													
+			<h:column>
+				<f:facet name="header">Alterar</f:facet>
+				<h:commandLink action="#{controleProjeto.alterar(obj)}" value="Alterar" />
+			</h:column>		
+			<h:column>
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandLink action="#{controleProjeto.excluir(obj)}" value="Excluir" 
+				onclick="if (!confirm('Confirma a exclusão do objeto'))) return false"
+				/>
+			</h:column>										
+		</h:dataTable>
+	</h:form>
+</h:body> 
+</html>
