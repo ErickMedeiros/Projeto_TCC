@@ -7,6 +7,8 @@
 
 <ui:composition template="/templates/layout.xhtml">
 	<ui:define name="content">
+	<h:outputScript library="javascripts" name="scripts.js" />
+		
 		<script type="text/javascript">
 		PrimeFaces.locales['pt_BR'] = {
 			closeText : 'Fechar',
@@ -40,12 +42,11 @@
 			allDayText : 'Todo Dia'
 		};
 	</script>
-		<h:outputScript library="js" name="scripts.js" />
+    
 
 		<h:form id="form">
-			<p:panel header="Projeto">
+			<p:panel header="Cadastro de Projeto">
 				<h:messages />
-				<h:commandLink action="/index?faces-redirect=true" value="HOME" />
 				<br />
 				<h:panelGroup rendered="#{controleProjeto.addFunc == false}">
 					<h:panelGrid columns="2">
