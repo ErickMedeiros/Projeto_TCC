@@ -13,7 +13,7 @@
 
 	<p:panelMenu style="width:200px ;margin-top: 5px; margin-left: 5px ">
 
-
+		<p:outputLabel value="Usuário Logado: #{controleLogin.usuarioLogado.nome}"/>
 		<p:submenu label="Projeto">
 
 			<p:menuitem value="Listar Projeto" action="#{controleProjeto.listar()}"
@@ -43,6 +43,11 @@
 				icon="ui-icon-disk" />
 		</p:submenu>
 
+		<p:submenu label="LogOff">
+
+			<p:commandLink action="#{controleLogin.efetuarLogout()}" value="Sair"/>
+			
+		</p:submenu>
 
 	</p:panelMenu>
 </h:form>

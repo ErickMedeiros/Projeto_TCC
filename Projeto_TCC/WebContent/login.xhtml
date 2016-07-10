@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>Login do Usuário</h:head> 
+<body> 
+		<h:form>
+			<h:panelGrid columns="2">
+			<f:facet name="header">Dados do Usuário</f:facet>
+			<f:facet name="footer">
+			<div align="center">
+			<h:commandButton action="#{controleLogin.efetuarLogin()}" value="Login" />
+			</div>		
+			</f:facet>
+			<h:outputLabel value="Usuário" />
+			<h:inputText value="#{controleLogin.usuario}" size="20" />
+			<h:outputLabel value="Senha" />
+			<h:inputSecret value="#{controleLogin.senha}"/>
+			</h:panelGrid>
+		</h:form>
+</body> 
+</html>

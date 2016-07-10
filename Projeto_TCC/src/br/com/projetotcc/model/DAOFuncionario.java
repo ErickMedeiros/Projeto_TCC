@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.projetotcc.beans.Funcionario;
 import br.com.projetotcc.conversores.ConverterOrdem;
@@ -71,6 +72,24 @@ public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{
 	
 	public Funcionario localizar (Integer id){
 		return em.find(Funcionario.class, id);
+	}
+	
+	public boolean login(String usuario, String senha){
+		Query query = em.createQuery("from funcionario where upper(nome_usuario) = :usuario"
+				+ "upper (senha) = :senha and ativo=true");
+		query.setParameter("usuario", usuario.toUpperCase());
+		query.setParameter("senha", senha.toUpperCase());
+		if(!query.getResultList().isEmpty()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public Funcionario LocalizaPorNome(String usuario){
+		return (Funcionario) em.createQuery("from funcionario where upper(nome_usuario) = "
+				+ ":usuario").setParameter("usuario", usuario.toUpperCase()).getSingleResult();
 	}
 	
 	public EntityManager getEm() {
