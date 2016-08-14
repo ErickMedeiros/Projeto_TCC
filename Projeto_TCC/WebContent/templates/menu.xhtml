@@ -8,22 +8,30 @@
 
 
 <h:form>
+<h:panelGroup rendered="#{controleLogin.usuarioLogado != null}">
+	
+	<h:outputLabel value="Usuario Logado: #{controleLogin.usuarioLogado.nome}" />
+	<h:commandLink action="#{controleLogin.efetuarLogout()}"
+					value="Sair" />
+		
+</h:panelGroup>		
+
 	<p:growl autoUpdate="true" />
 
 
 	<p:panelMenu style="width:200px ;margin-top: 5px; margin-left: 5px ">
 
-		<p:outputLabel value="Usuário Logado: #{controleLogin.usuarioLogado.nome}"/>
+
 		<p:submenu label="Projeto">
 
-			<p:menuitem value="Listar Projeto" action="#{controleProjeto.listar()}"
-				icon="ui-icon-disk" />
+			<p:menuitem value="Listar Projeto"
+				action="#{controleProjeto.listar()}" icon="ui-icon-disk" />
 		</p:submenu>
 
 		<p:submenu label="Funcionário">
 
-			<p:menuitem value="Listar Funcionário" action="#{controleFuncionario.listar()}"
-				icon="ui-icon-disk" />
+			<p:menuitem value="Listar Funcionário"
+				action="#{controleFuncionario.listar()}" icon="ui-icon-disk" />
 		</p:submenu>
 		<p:submenu label="Função">
 
@@ -43,13 +51,13 @@
 				icon="ui-icon-disk" />
 		</p:submenu>
 
-		<p:submenu label="LogOff">
-
-			<p:commandLink action="#{controleLogin.efetuarLogout()}" value="Sair"/>
-			
-		</p:submenu>
-
 	</p:panelMenu>
+
+	<h:panelGroup rendered="#{controleLogin.usuarioLogado == null}">
+		<h:commandLink action="#{controleLogin.paginaLogin()}" value="Login" />
+	</h:panelGroup>
+
+
 </h:form>
 
 </html>

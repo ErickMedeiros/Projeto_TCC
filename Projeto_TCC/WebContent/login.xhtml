@@ -4,21 +4,21 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head>Login do Usuário</h:head> 
-<body> 
-		<h:form>
-			<h:panelGrid columns="2">
-			<f:facet name="header">Dados do Usuário</f:facet>
+<h:head><title>Login de usuario</title></h:head> 
+<h:body> 	
+	<h:form>
+		<h:panelGrid columns="2">
+			<f:facet name="header">Dados do usuario</f:facet>
 			<f:facet name="footer">
-			<div align="center">
-			<h:commandButton action="#{controleLogin.efetuarLogin()}" value="Login" />
-			</div>		
+				<div align="center">
+					<h:commandButton value="Login" action="#{controleLogin.efetuarLogin()}" />
+				</div>				
 			</f:facet>
-			<h:outputLabel value="Usuário" />
-			<h:inputText value="#{controleLogin.usuario}" size="20" />
+			<h:outputLabel value="Usuario" />
+			<h:inputText value="#{controleLogin.usuario}" size="20"/>
 			<h:outputLabel value="Senha" />
-			<h:inputSecret value="#{controleLogin.senha}"/>
-			</h:panelGrid>
-		</h:form>
-</body> 
+			<h:inputSecret value="#{controleLogin.senha}" />
+		</h:panelGrid>
+	</h:form>
+</h:body> 
 </html>

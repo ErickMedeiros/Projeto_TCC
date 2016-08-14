@@ -6,20 +6,19 @@ import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.com.projetotcc.beans.Funcionario;
-import br.com.projetotcc.model.DAOFuncionario;
+import br.com.projetotcc.model.FuncionarioDAO;
 import br.com.projetotcc.util.UtilMensagens;
 @SuppressWarnings("serial")
 @ManagedBean("controleLogin")
 @SessionScoped
 public class ControleLogin implements Serializable {
-
-	private DAOFuncionario dao;
+	private FuncionarioDAO dao;
 	private Funcionario usuarioLogado;
 	private String usuario;
 	private String senha;
 	
 	public ControleLogin(){
-		dao = new DAOFuncionario();
+		dao = new FuncionarioDAO();
 	}
 	
 	public String paginaLogin(){
@@ -28,12 +27,12 @@ public class ControleLogin implements Serializable {
 	
 	public String efetuarLogin(){
 		if (dao.login(usuario, senha)){
-			usuarioLogado = dao.LocalizaPorNome(usuario);
-			UtilMensagens.mensagemInformacao("Login efetuado com sucessi!");
+			usuarioLogado = dao.localizaPorNome(usuario);
+			UtilMensagens.mensagemInformacao("Login efetuado com sucesso!");
 			return "/index";
-		}else{
-			UtilMensagens.mensagemErro("Falha no Login"
-					+ "Usuário ou Senha Inválidos");
+		} else {
+			UtilMensagens.mensagemErro("Login não efetuado com sucesso!"
+					+ " Usuario ou senha invalidos!");
 			return "/login";
 		}
 	}
@@ -41,14 +40,12 @@ public class ControleLogin implements Serializable {
 	public String efetuarLogout(){
 		usuarioLogado = null;
 		return "/index";
-		
 	}
 	
-	
-	public DAOFuncionario getDao() {
+	public FuncionarioDAO getDao() {
 		return dao;
 	}
-	public void setDao(DAOFuncionario dao) {
+	public void setDao(FuncionarioDAO dao) {
 		this.dao = dao;
 	}
 	public Funcionario getUsuarioLogado() {
@@ -69,7 +66,4 @@ public class ControleLogin implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
-	
 }

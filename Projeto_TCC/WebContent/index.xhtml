@@ -9,16 +9,11 @@
 	template="/templates/layout.xhtml">
     
     
-<h:form>
-<h:panelGroup rendered="#{controleLogin.usuarioLogado != null}">
+
 <ui:composition template="/templates/layout.xhtml">
 	<ui:define name="tituloJanela">Sistema de Cadastro de Projetos</ui:define>
 	<ui:define name="conteudo"> Seja bem vindo ao Sistema!!!</ui:define>
 	
 </ui:composition>
-</h:panelGroup>
-<h:panelGroup rendered="#{controleLogin.usuarioLogado == null">
-	<h:commandLink action="controleLogin.paginaLogin" value="Login" />
-</h:panelGroup>
-</h:form>
+
 </html>

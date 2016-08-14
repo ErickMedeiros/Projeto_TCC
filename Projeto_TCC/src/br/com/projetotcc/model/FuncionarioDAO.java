@@ -1,57 +1,50 @@
 package br.com.projetotcc.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.projetotcc.beans.Funcionario;
-import br.com.projetotcc.conversores.ConverterOrdem;
+import br.com.projetotcc.beans.Grupo;
 import br.com.projetotcc.jpa.EntityManagerUtil;
 import br.com.projetotcc.util.UtilErros;
 import br.com.projetotcc.util.UtilMensagens;
 
-@SuppressWarnings("serial")
-public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{ 
-
+public class FuncionarioDAO {
+	
 	private EntityManager em;
 	
-	public DAOFuncionario(){
-		super.setClasse(Funcionario.class);
-		super.setEm(EntityManagerUtil.getEntityManager());
-		super.getListaOrdem().add(new Ordem("Código", "id"));
-		super.getListaOrdem().add(new Ordem("Nome", "nome"));
-		super.setOrdemAtual((Ordem) super.getListaOrdem().get(1));
-		super.setFiltro("");
-		super.setMaximoObjetos(1);
-		super.setConverterOrdem(new ConverterOrdem(super.getListaOrdem()));
+	public FuncionarioDAO(){
+		em = EntityManagerUtil.getEntityManager();
 	}
 	
-	
-	
-	public boolean gravar (Funcionario obj){
-		try{
+	public List<Funcionario> listarTodos(){
+		return em.createQuery("from Funcionario order by nome").getResultList();
+	}
+
+	public boolean gravar(Funcionario obj){
+		try {
 			em.getTransaction().begin();
 			if (obj.getId() == null){
 				em.persist(obj);
-			} else{
+			} else {
 				em.merge(obj);
 			}
 			em.getTransaction().commit();
-			UtilMensagens.mensagemInformacao("Dados gravados com sucesso!");
+			UtilMensagens.mensagemInformacao("Objeto persistido com sucesso!");
 			return true;
-		} catch (Exception e) {
-			if(em.getTransaction().isActive()== false){
+		} catch (Exception e){
+			if (em.getTransaction().isActive() == false){
 				em.getTransaction().begin();
 			}
 			em.getTransaction().rollback();
-			UtilMensagens.mensagemErro("Erro ao gravar dados no banco"+
-			UtilErros.getMensagemErro(e));
+			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
-
+	
 	public boolean excluir(Funcionario obj){
 		try {
 			em.getTransaction().begin();
@@ -70,12 +63,12 @@ public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{
 		}
 	}	
 	
-	public Funcionario localizar (Integer id){
+	public Funcionario localizar(Integer id){
 		return em.find(Funcionario.class, id);
 	}
 	
 	public boolean login(String usuario, String senha){
-		Query query = em.createQuery("from Funcionario where upper(nome_usuario) = :usuario"
+		Query query = em.createQuery("from Funcionario where upper(nomeUsuario) = :usuario"
 				+ " and upper(senha) = :senha and ativo = true");
 		query.setParameter("usuario", usuario.toUpperCase());
 		query.setParameter("senha", senha.toUpperCase());
@@ -87,10 +80,12 @@ public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{
 	}
 	
 	public Funcionario localizaPorNome(String usuario){
-		return (Funcionario) em.createQuery("from Funcionario where upper(nome_usuario) = "
+		return (Funcionario) em.createQuery("from Funcionario where upper(nomeUsuario) = "
 				+ ":usuario").setParameter("usuario", usuario.toUpperCase()).
 				getSingleResult();
 	}
+	
+	
 	
 	public EntityManager getEm() {
 		return em;
@@ -99,5 +94,5 @@ public class DAOFuncionario<T> extends GenericDAO<T>  implements Serializable{
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
+
 }

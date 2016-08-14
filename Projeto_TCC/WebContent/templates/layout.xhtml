@@ -22,6 +22,9 @@
 
 <h:body>
 
+<h:form>
+<h:panelGroup rendered="#{controleLogin.usuarioLogado != null}">
+</h:panelGroup>
 	<header class="aw-topbar">
 		<h:graphicImage library="projetotcc" name="images/images.png" right="156" height="40" align="center"/>
 		
@@ -35,6 +38,12 @@
 	<section class="aw-content  js-content">
 		<ui:insert name="content" />
 	</section>
+<h:panelGroup rendered="#{controleLogin.usuarioLogado == null}">
+	<h:commandLink action="controleLogin.paginaLogin" value="Login" />
+</h:panelGroup>
+</h:form>
+
+
 	
 </h:body>
 
