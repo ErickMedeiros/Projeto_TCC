@@ -2,14 +2,15 @@ package br.com.projetotcc.controle;
 
 import java.io.Serializable;
 
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.com.projetotcc.beans.Funcionario;
 import br.com.projetotcc.model.FuncionarioDAO;
 import br.com.projetotcc.util.UtilMensagens;
+
 @SuppressWarnings("serial")
-@ManagedBean("controleLogin")
+@ManagedBean(name="controleLogin")
 @SessionScoped
 public class ControleLogin implements Serializable {
 	private FuncionarioDAO dao;
